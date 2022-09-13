@@ -1,0 +1,45 @@
+* {
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.8rem;
+  background-color: #eee;
+  font-family: 'PT Sans', sans-serif;
+  margin: 10px 10px;
+  padding: 15px 15px;
+  font-size: small;
+  color: rgb(57, 51, 51);
+} 
+
+input {
+  border: 0.5px solid lightgrey;
+}
+
+.input:hover {
+  background-color: lightgoldenrodyellow;
+}
+
+input[type='submit'] {
+  border: 0.5px solid black;
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px gray;
+  font-size: small;
+  color: rgb(57, 51, 51);
+}
+
+@media only screen and (max-width: 768px) {
+  [class='container'] {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: rows;
+  }
+}
+
+
+
+ 
