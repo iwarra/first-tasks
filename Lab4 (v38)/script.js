@@ -1,3 +1,5 @@
+// del 1
+
 let firstNum = 5;
 let secondNum = 10;
 
@@ -6,6 +8,8 @@ console.log(firstNum - secondNum);
 console.log(firstNum * secondNum);
 
 console.log(`${firstNum} + ${secondNum} is: ${firstNum + secondNum}`)
+
+//del 2
 
 let obj = {
   name: 'Jane',
