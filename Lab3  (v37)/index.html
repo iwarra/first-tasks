@@ -10,6 +10,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
   <link rel="stylesheet" href="custom.css">
+
+  <script src="/script.js" defer></script>
   
   <title>Home</title>
 </head>
@@ -86,21 +88,6 @@
       <a class="text-white" href="/">DB.com</a>
     </div>
 </footer>
-
-<script>
-  let button = document.querySelector(".btn")
-
-  button.addEventListener("click", () => {
-    if (event.target.getAttribute("aria-expanded") == "true") {
-    button.textContent = "Less"
-    }
-
-    if (event.target.getAttribute("aria-expanded") == "false") {
-    button.textContent = "More"
-    }
-  })
-
-</script>
 
 </body>
 
