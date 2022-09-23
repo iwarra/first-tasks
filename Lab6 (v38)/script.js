@@ -5,6 +5,7 @@ hello();
 
 
 //Funktion 2:
+// name can be without () as well
 const greet = (name) => console.log('Hej ' + name + ' hur mår du?');
 
 greet('John');
