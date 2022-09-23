@@ -20,8 +20,8 @@ console.log(calc(1, 10));
 
 //Funktion 4:
 const tip = (sum, percent) => {
-let total = sum + sum / percent;
+let total = sum + sum * percent;
 return total;
 };
 
-console.log(tip(200, 10));
+console.log(tip(200, 0.2));
