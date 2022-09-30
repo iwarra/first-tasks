@@ -25,3 +25,4 @@ return total;
 };
 
 console.log(tip(200, 0.2));
+

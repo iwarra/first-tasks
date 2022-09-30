@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .cube input {
+      margin-bottom: 0.6rem;
+    }
+    #btn-link {
+      margin-top: 0.6rem;
+    }
+  </style>
+  <title>Lab 7</title>
+</head>
+
+<body>
+  <div class="text2Uppdate">
+    <p id="para">Denna paragraf är gammal och måste uppdateras.</p>
+    <button id="btn">Uppdatera</button>
+  </div>
+  <hr> 
+  <br>
+
+  <div class="link2Uppdate">
+    <a id="link" href="https://example.com/" target="_blank" rel="noopener noreferrer">Example länk</a>
+    <br> 
+    <button id="btn-link">Ändra länk</button>
+  </div>
+  <hr>
+  <br>
+
+  <div class="cube">
+    <form>
+      <label for="width">Width:</label>
+      <input type="number" name="width" id="width">
+      <br> 
+      <label for="length">Length:</label>
+      <input type="number" name="length" id="length">
+      <br>
+      <label for="height">Height:</label>
+      <input type="number" name="height" id="height">
+      <br>
+      <button type="submit" id="resultButton" onclick='event.preventDefault()' >Show result</button>
+    </form>
+    <div id="resultDiv">
+    </div>
+  </div>
+
+</body>
+</html>
