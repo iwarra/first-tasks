@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+  <title>Form Validation</title>
+</head>
+
+<body>
+  <form class="container">
+    <header class="header">
+      <h1>Sign Up</h1>
+      <span>* Required fields</span>
+    </header>
+
+    <div class="label-input">
+      <label for="firstName">* Name:</label>
+      <input type="text" id="name" name="name" placeholder="Jane" required minlength="2">
+    </div>
+
+    <div class="label-input">
+      <label for="surname">* Surname:</label>
+      <input type="text" id="surname" name="surname" placeholder="Doe" required minlength="2">
+    </div>
+
+    <div class="label-input">
+      <label for="">* Email:</label>
+      <input type="email" name="email" id="email" placeholder="jane.doe@mail.com"
+          required pattern="[a-z0-9._%+-]+@(?:[a-z0-9-]+\.)+[a-z]{2,}$"> 
+      <span class="error">Please enter a valid email!</span>
+    </div>
+
+    <div class="label-input"> 
+      <label for="password">* Password:</label>
+      <input type="password" name="password" id="password" required minlength="6" pattern="(?=.*\d)(?=.*[A-Z]).{6,30}$">
+      <span class="error">Please enter the right format.</span>
+      <span class="password-span">Password must contain minimum one number and one uppercase letter.</span>
+    </div>
+
+    <div class="label-input">
+      <label for="confirmPassword">* Confirm password:</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" required >
+      <span class="error">Passwords must match.</span>
+    </div>
+
+    <div class="label-input-column">
+      <div>
+        <label for="cities">Choose a city:</label>
+        <select name="cities" id="cities">
+          <option value="Stockholm">Stockholm</option>
+          <option value="Malmo">Malmö</option>
+          <option value="Gothenburg">Göteborg</option>
+        </select>
+      </div>
+      <div class="label-input-checkbox">
+        <label for="updates">Remember me:</label>
+        <input type="checkbox" name="updates" id="updates">
+      </div>
+    </div>
+
+    <div class="label-input-register">
+      <label for="registerBtn"></label>
+      <input type="submit" value="Register" class="registerBtn" id="registerBtn">
+    </div>
+  </form>
+    
+</body>
+</html>

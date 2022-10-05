@@ -48,5 +48,5 @@ function cube(width, length, height) {
   
 }
 
- let resultButton = document.querySelector('#resultButton');
+let resultButton = document.querySelector('#resultButton');
 resultButton.addEventListener('click', cube) 
