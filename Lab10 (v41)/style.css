@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+:root {
+  --red: #e10404;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Kanit', sans-serif;
+}
+
+h1 {
+  margin: .5em; 
+}
+
+.container {
+  display: flex;
+  padding: 1em;
+}
+
+.btn {
+  cursor: pointer;
+  border: 2px solid rgb(95, 95, 95);
+  border-radius: 10px;
+  background: radial-gradient(snow 16px, transparent 16px), var(--red);
+  background-size: 30px 30px;
+  height: 314px;
+  width: 226px;
+}
+
+.btn-text {
+  font-size: 2rem;
+  font-weight: 700;
+  background-color: white;
+  border: 2px solid var(--red);
+  border-radius: 5px;
+  padding-inline: .2em;
+}
+
+.btn-text.after {
+  margin-right: 78px;
+  transition: margin .5s;
+}
+
+.image {
+  margin-left: -85px;
+  z-index: 1;
+}
