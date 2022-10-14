@@ -18,6 +18,4 @@ async function showCard() {
   btnText.classList.add('after')
 }
 
-btn.addEventListener('click', () => {
-  showCard();
-})
+btn.addEventListener('click', showCard)
