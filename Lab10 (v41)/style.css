@@ -40,11 +40,13 @@ h1 {
 }
 
 .btn-text.after {
-  margin-right: 78px;
+  writing-mode: vertical-lr;
+  font-size: 1.8rem;
+  margin-right: 115px;
   transition: margin .5s;
 }
 
 .image {
-  margin-left: -85px;
+  margin-left: -120px;
   z-index: 1;
 }
