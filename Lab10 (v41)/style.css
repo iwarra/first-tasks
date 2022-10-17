@@ -50,3 +50,8 @@ h1 {
   margin-left: -120px;
   z-index: 1;
 }
+
+.result {
+  font-size: 1.5rem;
+  padding-left: 1em;
+}
