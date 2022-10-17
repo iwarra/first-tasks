@@ -53,3 +53,7 @@ h1 {
 .result {
   margin: .5em; 
 }
+
+.result-text.show{
+  font-size: 1.3rem;
+}
