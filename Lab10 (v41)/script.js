@@ -1,5 +1,5 @@
 let img = document.createElement('img');
-let imgDiv = document.querySelector('.image');
+let imgDiv = document.querySelector('.imageDiv');
 let btn = document.querySelector('.btn');
 
 async function getCardJson() {
@@ -10,7 +10,7 @@ async function getCardJson() {
 
 async function showCard() {
   let cardURL = await getCardJson()
-  let card = cardURL.cards.at(0).image
+  let card = cardURL.cards.at(0).image;
   img.setAttribute('src', card);
   imgDiv.appendChild(img)
 

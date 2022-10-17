@@ -46,12 +46,7 @@ h1 {
   transition: margin .5s;
 }
 
-.image {
+.imageDiv {
   margin-left: -120px;
   z-index: 1;
-}
-
-.result {
-  font-size: 1.5rem;
-  padding-left: 1em;
 }
