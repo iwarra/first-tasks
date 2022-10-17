@@ -2,6 +2,7 @@ let imgDiv = document.querySelector('.imageDiv');
 let btn = document.querySelector('.btn');
 let resultText = document.querySelector('.result-text');
 let result = 0;
+let deckID = '';
 
 function stylingButton() {
   let btnText = document.querySelector('.btn-text');
@@ -12,12 +13,11 @@ async function getDeck(nrOfDecks) {
   let deck = await fetch ('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=' + nrOfDecks);
   let deckJson = await deck.json();
   deckID = deckJson.deck_id;
-  console.log(deckID)
   return deckID
 }
 
 async function getCardJson() {
-  let deckID = await getDeck(1);
+  if (deckID == '') {deckID = await getDeck(1)};
   let card = await fetch(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`);
   let cardJSON = await card.json();
   return cardJSON
@@ -53,7 +53,7 @@ function showCardValue() {
     case cardValue == 'ACE':
     result > 12 ? cardValue = 1 : cardValue = 11;
     default:
-      console.log('Chose your card.')
+      console.log('Choose your card.')
   }
 
   result = result + +cardValue;
