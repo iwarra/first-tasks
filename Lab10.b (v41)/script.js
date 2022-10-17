@@ -11,13 +11,12 @@ function stylingButton() {
 async function getDeck(nrOfDecks) {
   let deck = await fetch ('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=' + nrOfDecks);
   let deckJson = await deck.json();
-  //console.log(deckJson)
+  deckID = deckJson.deck_id;
+  return deckID
 }
 
-getDeck(1)
-
 async function getCardJson() {
-  let card = await fetch('https://deckofcardsapi.com/api/deck/new/draw/?count=1');
+  let card = await fetch(`https://deckofcardsapi.com/api/deck/${await getDeck(1)}/draw/?count=1`);
   let cardJSON = await card.json();
   return cardJSON
 }
@@ -27,7 +26,7 @@ async function showCards() {
   img.classList.add('image');
   
   let cardJson = await getCardJson();
-  //console.log(cardJson)
+  console.log(cardJson)
   let cardImgURL = cardJson.cards.at(0).image;
   //console.log(cardImgURL)
   img.setAttribute('src', cardImgURL);
@@ -38,16 +37,17 @@ async function showCards() {
 
 async function showCardValue() {
   let cardJson = await getCardJson()
-  let cardValue = cardJson.cards.at(0).value;
+  let cardValue = cardJson.cards[0].value;
+  console.log(cardValue)
   let result =+ cardValue;
-  console.log(result);
-  console.log(resultText.innerText)
-  resultText.innerText += result
+  //console.log(result);
+  //console.log(resultText.innerText)
+  resultText.innerHTML = 'Your result is: ' + result;
 }
 
-showCardValue()
+//showCardValue()
 
 btn.addEventListener('click', () => { 
-  showCards()
- //showCardValue()
+  showCards();
+  showCardValue()
 })
