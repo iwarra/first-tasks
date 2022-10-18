@@ -51,14 +51,14 @@ h1 {
 }
 
 .result {
-  margin: .5em; 
+  margin-left: .8em; 
 }
 
 .result-text.show{
   font-size: 1.3rem;
 }
 
-.play-again-btn.hidden {
+.hidden {
   display: none;
 }
 
@@ -71,3 +71,21 @@ h1 {
   cursor: pointer;
 }
 
+.stop-btn {
+  visibility: hidden;
+  margin: .5em;
+  padding-inline: 1em;
+  padding-block: .2em;
+  font-size: 1.1em;
+  border: .5px solid green;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.computer-result {
+  margin-left: .8em; 
+}
+
+.computer-result-text.show{
+  font-size: 1.3rem;
+}
