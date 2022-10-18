@@ -57,3 +57,17 @@ h1 {
 .result-text.show{
   font-size: 1.3rem;
 }
+
+.play-again-btn.hidden {
+  display: none;
+}
+
+.play-again-btn {
+  margin: .5em; 
+  font-size: 1.3rem;
+  padding: .5em;
+  border: .5px solid green;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
