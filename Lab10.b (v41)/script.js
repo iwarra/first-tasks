@@ -100,8 +100,17 @@ function playerLost() {
   return
 };
 
+// in case of a tie
+function tiedResult() {
+  resultText.innerHTML += " It's a tie! <span>&#128558</span> Try again!";
+  playAgainBtn.classList.remove('hidden');
+  stopBtn.classList.add('hidden');
+  return 
+}
+
 function determineTheWinner() {
-  if (result == 21 & computersResult == 21) alert("It's a tie!");
+  if (result == 21 & computersResult == 21) tiedResult();
+  if (result == computersResult) tiedResult();
   if (result == 21) playerWon();
   if (computersResult == 21) playerLost();
 
