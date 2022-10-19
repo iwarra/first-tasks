@@ -104,9 +104,10 @@ let cardJson = await getCardJson();
     }
 
     if (result == 21) playerWon();
+    if (compFinalResult == 21) playerLost();
 
     if (result > 21 & compFinalResult > 21) {
-      result > compFinalResult ? playerLost() : playerWon();
+      (result > compFinalResult) ? playerLost() : playerWon();
     }
 
     /* if (result < 21 & compFinalResult < 21) {
