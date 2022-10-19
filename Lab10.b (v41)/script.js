@@ -49,8 +49,6 @@ async function computerPlays() {
   do { 
     computersResult += +translateCardValues(cardValue, computersResult) 
   } while (computersResult < result)
-
-  console.log(result, computersResult)
 }
 
 function showCompResult() {
@@ -77,6 +75,11 @@ let cardJson = await getCardJson();
 
     result += +translateCardValues(cardValue, result);
     resultText.innerHTML = 'Your result is: ' + result + '.';
+
+    if (result > 21) return playerLost();
+    
+    if (result == 21) return playerWon();
+
     return result;
   }
 
@@ -109,23 +112,15 @@ function tiedResult() {
 }
 
 function determineTheWinner() {
-  if (result == 21 & computersResult == 21) tiedResult();
-  if (result == computersResult) tiedResult();
-  if (result == 21) playerWon();
-  if (computersResult == 21) playerLost();
+  if (result == 21 & computersResult == 21) return tiedResult();
+  if (result == computersResult) return tiedResult();
 
-  if (result > 21 & computersResult > 21) {
-    (result > computersResult) ? playerLost() : playerWon();
-  }
+  if (computersResult == 21) return playerLost();
+
   if (result < 21 & computersResult < 21) {
     ((21 - result) < (21 - computersResult)) ? playerWon() : playerLost();
   }
-  if (result < 21 & computersResult > 21) {
-    ((21 - result) < (computersResult - 21)) ? playerWon() : playerLost();
-  }
-  if (result > 21 & computersResult < 21) {
-    ((result - 21) < (21 - computersResult)) ? playerWon() : playerLost();
-  }
+  if (result < 21 & computersResult > 21) return playerWon();
 }
 
 btn.addEventListener('click', () => { 
