@@ -41,23 +41,25 @@ function translateCardValues(cardValue, result) {
   }
 }
 
-// count result for computer
-let compResultsArr = [];
-async function computerResult() {
+// computer plays
+async function computerPlays() {
   let cardJson = await getCardJson();
   let cardValue = cardJson.cards[0].value;
 
-  computersResult = computersResult + +translateCardValues(cardValue, computersResult);
+  do { 
+    computersResult += +translateCardValues(cardValue, computersResult) 
+  } while (computersResult < result)
 
-  compResultsArr.push(computersResult);
+  console.log(result, computersResult)
+}
 
+function showCompResult() {
   computersResultText.innerHTML = "Computer's result is: " + computersResult + '.';
   return computersResult;
 }
 
-
 // player plays
-async function currentCard() {
+async function currentCardPlayer() {
 let cardJson = await getCardJson();
 
   function showCards() {
@@ -73,58 +75,57 @@ let cardJson = await getCardJson();
   function showResult() {
     let cardValue = cardJson.cards[0].value;
 
-    result = result + +translateCardValues(cardValue, result);
+    result += +translateCardValues(cardValue, result);
     resultText.innerHTML = 'Your result is: ' + result + '.';
     return result;
   }
 
   showCards();
   showResult();
-  computerResult();
-
-  function playerWon() {
-    resultText.innerHTML += ' Congrats, you won! <span>&#129395</span>';
-    playAgainBtn.classList.remove('hidden');
-    stopBtn.classList.add('hidden');
-    return 
-  };
-
-  function playerLost() {
-    resultText.innerHTML += ' Sorry, you lost! <span>&#129322</span>';
-    playAgainBtn.classList.remove('hidden');
-    stopBtn.classList.add('hidden');
-    return
-  };
-
-  function determineTheWinner() {
-    compFinalResult = compResultsArr.at(compResultsArr.length - 1);
-
-    if (result == 21 & compFinalResult == 21) {
-      alert("It's a tie!")
-    }
-
-    if (result == 21) playerWon();
-    if (compFinalResult == 21) playerLost();
-
-    if (result > 21 & compFinalResult > 21) {
-      (result > compFinalResult) ? playerLost() : playerWon();
-    }
-
-    /* if (result < 21 & compFinalResult < 21) {
-      result > compFinalResult ? playerWon() : playerLost();
-    } 
-    Should this be the case for stop button???
-    */
-
-    // Cases when one is over and the other is under 21
-  }
-
-  determineTheWinner();
-
 }
 
+// if player wins (display changes)
+function playerWon() {
+  resultText.innerHTML += ' Congrats, you won! <span>&#129395</span>';
+  playAgainBtn.classList.remove('hidden');
+  stopBtn.classList.add('hidden');
+  return 
+};
+
+// if player looses (display changes)
+function playerLost() {
+  resultText.innerHTML += ' Sorry, you lost! <span>&#129322</span>';
+  playAgainBtn.classList.remove('hidden');
+  stopBtn.classList.add('hidden');
+  return
+};
+
+function determineTheWinner() {
+  if (result == 21 & computersResult == 21) alert("It's a tie!");
+  if (result == 21) playerWon();
+  if (computersResult == 21) playerLost();
+
+  if (result > 21 & computersResult > 21) {
+    (result > computersResult) ? playerLost() : playerWon();
+  }
+  if (result < 21 & computersResult < 21) {
+    ((21 - result) < (21 - computersResult)) ? playerWon() : playerLost();
+  }
+  if (result < 21 & computersResult > 21) {
+    ((21 - result) < (computersResult - 21)) ? playerWon() : playerLost();
+  }
+  if (result > 21 & computersResult < 21) {
+    ((result - 21) < (21 - computersResult)) ? playerWon() : playerLost();
+  }
+}
 
 btn.addEventListener('click', () => { 
-  currentCard();
+  currentCardPlayer();
+  computerPlays();
   stopBtn.style.visibility = 'visible';
+})
+
+stopBtn.addEventListener('click', () => {
+  showCompResult();
+  determineTheWinner();
 })
