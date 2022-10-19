@@ -13,7 +13,6 @@ function stylingButton() {
   btnText.classList.add('after')
 }
 
-
 async function getDeck(nrOfDecks) {
   let deck = await fetch ('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=' + nrOfDecks);
   let deckJson = await deck.json();
@@ -28,27 +27,30 @@ async function getCardJson() {
   return cardJSON
 }
 
+function translateCardValues(cardValue, result) {
+  let imageCards = ['JACK', 'KING', 'QUEEN'];
+  let ace = 'ACE'
+
+  switch (true) {
+    case (cardValue > 1 && cardValue <= 10):
+      return cardValue;
+    case imageCards.includes(cardValue):
+      return cardValue = 10;
+    case cardValue == ace:
+      return result > 12 ? cardValue = 1 : cardValue = 11;
+  }
+}
+
 // count result for computer
+let compResultsArr = [];
 async function computerResult() {
   let cardJson = await getCardJson();
   let cardValue = cardJson.cards[0].value;
 
-    switch (true) {
-      case cardValue > 1 && cardValue <= 10:
-        cardValue = cardValue;
-        break;
-      case cardValue == 'JACK':
-      case cardValue == 'KING':
-      case cardValue == 'QUEEN':
-        cardValue = 10;
-        break;
-      case cardValue == 'ACE':
-        result > 12 ? cardValue = 1 : cardValue = 11;
-      default:
-        console.log('Choose your card.')
-    }
+  computersResult = computersResult + +translateCardValues(cardValue, computersResult);
 
-  computersResult = computersResult + +cardValue;
+  compResultsArr.push(computersResult);
+
   computersResultText.innerHTML = "Computer's result is: " + computersResult + '.';
   return computersResult;
 }
@@ -71,53 +73,53 @@ let cardJson = await getCardJson();
   function showResult() {
     let cardValue = cardJson.cards[0].value;
 
-    switch (true) {
-      case cardValue > 1 && cardValue <= 10:
-        cardValue = cardValue;
-        break;
-      case cardValue == 'JACK':
-      case cardValue == 'KING':
-      case cardValue == 'QUEEN':
-        cardValue = 10;
-        break;
-      case cardValue == 'ACE':
-        result > 12 ? cardValue = 1 : cardValue = 11;
-      default:
-        console.log('Choose your card.')
-    }
+    result = result + +translateCardValues(cardValue, result);
+    resultText.innerHTML = 'Your result is: ' + result + '.';
+    return result;
+  }
 
-  result = result + +cardValue;
-  resultText.innerHTML = 'Your result is: ' + result + '.';
-  return result;
-}
+  showCards();
+  showResult();
+  computerResult();
 
-showCards();
-showResult();
-computerResult();
-
-
-function determineTheWinner() {
- /*  if (result == 21 & computerResult() == 21) {
-    alert("It's a tie, please try again!")
-  } */
-  if (result == 21) {
+  function playerWon() {
     resultText.innerHTML += ' Congrats, you won! <span>&#129395</span>';
     playAgainBtn.classList.remove('hidden');
     stopBtn.classList.add('hidden');
-  }
-  /* if (computerResult() == 21) {
-    computersResultText.innerHTML += ' Congrats, you won! <span>&#129395</span>';
-    playAgainBtn.classList.remove('hidden');
-    stopBtn.classList.add('hidden');
-  } */
-  if (result > 21) {
+    return 
+  };
+
+  function playerLost() {
     resultText.innerHTML += ' Sorry, you lost! <span>&#129322</span>';
     playAgainBtn.classList.remove('hidden');
     stopBtn.classList.add('hidden');
+    return
+  };
+
+  function determineTheWinner() {
+    compFinalResult = compResultsArr.at(compResultsArr.length - 1);
+
+    if (result == 21 & compFinalResult == 21) {
+      alert("It's a tie!")
+    }
+
+    if (result == 21) playerWon();
+
+    if (result > 21 & compFinalResult > 21) {
+      result > compFinalResult ? playerLost() : playerWon();
+    }
+
+    /* if (result < 21 & compFinalResult < 21) {
+      result > compFinalResult ? playerWon() : playerLost();
+    } 
+    Should this be the case for stop button???
+    */
+
+    // Cases when one is over and the other is under 21
   }
-  
-}
-determineTheWinner();
+
+  determineTheWinner();
+
 }
 
 
