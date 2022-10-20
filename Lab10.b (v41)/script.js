@@ -1,17 +1,14 @@
-let imgDiv = document.querySelector('.imageDiv');
-let btn = document.querySelector('.btn');
-let resultText = document.querySelector('.result-text');
-let computersResultText = document.querySelector('.computer-result-text');
-let playAgainBtn = document.querySelector('.play-again-btn');
-let stopBtn = document.querySelector('.stop-btn');
+// Variable declaration
+const imgDiv = document.querySelector('.imageDiv');
+const btn = document.querySelector('.btn');
+const resultText = document.querySelector('.result-text');
+const computersResultText = document.querySelector('.computer-result-text');
+const playAgainBtn = document.querySelector('.play-again-btn');
+const stopBtn = document.querySelector('.stop-btn');
 let result = 0;
 let computersResult = 0;
 let deckID = '';
 
-function stylingHitMeButton() {
-  let btnText = document.querySelector('.btn-text');
-  btnText.classList.add('after')
-}
 
 async function getDeck(nrOfDecks) {
   let deck = await fetch ('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=' + nrOfDecks);
@@ -20,63 +17,42 @@ async function getDeck(nrOfDecks) {
   return deckID
 }
 
-async function getCardJson() {
-  if (deckID == '') { deckID = await getDeck(1) };
+//choose a card and get card info
+async function play() {
+  if (!deckID) deckID = await getDeck(1);
+
   let card = await fetch(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`);
-  let cardJSON = await card.json();
-  return cardJSON
-}
+  let cardJson = await card.json();
 
-function translateCardValues(cardValue, result) {
-  let imageCards = ['JACK', 'KING', 'QUEEN'];
-  let ace = 'ACE'
-
-  switch (true) {
-    case (cardValue > 1 && cardValue <= 10):
-      return cardValue;
-    case imageCards.includes(cardValue):
-      return cardValue = 10;
-    case cardValue == ace:
-      return result > 12 ? cardValue = 1 : cardValue = 11;
+  return {
+    cardValue: cardJson.cards.at(0).value,
+    cardImage: cardJson.cards.at(0).image,
+    ID: cardJson.deck_id,
   }
 }
 
 // computer plays
 async function computerPlays() {
-  let cardJson = await getCardJson();
-  let cardValue = cardJson.cards[0].value;
+  let cardInfo = await play();
 
-   while (computersResult < result & computersResult < 23) { 
-    computersResult += +translateCardValues(cardValue, computersResult) 
+  // is there a better way to prevent comp from having high results ? (used < 23)
+  while (computersResult < result & computersResult < 23) { 
+    computersResult += +translateCardValues(cardInfo.cardValue, computersResult) 
   }
-  
-}
 
-function showCompResult() {
-  computersResultText.innerHTML = "Computer's result is: " + computersResult + '.';
-  return computersResult;
 }
 
 // player plays
 async function currentCardPlayer() {
-let cardJson = await getCardJson();
-
-  function showCards() {
-    let img = document.createElement('img');
-    img.classList.add('image');
-    let cardImgURL = cardJson.cards.at(0).image;
-    img.setAttribute('src', cardImgURL);
-    imgDiv.appendChild(img);
-
-    stylingHitMeButton();
-  }
-
+  let cardInfo = await play();
+  let cardValue = cardInfo.cardValue;
+  let cardImgURL = cardInfo.cardImage;
+  showCard(cardImgURL);
+  
   function showResult() {
-    let cardValue = cardJson.cards[0].value;
-
     result += +translateCardValues(cardValue, result);
     resultText.innerHTML = 'Your result is: ' + result;
-
+    
     if (result > 21) {
       playerLost();
       btn.removeEventListener('click', clickHitMeEvent);
@@ -86,11 +62,10 @@ let cardJson = await getCardJson();
       playerWon();
       btn.removeEventListener('click', clickHitMeEvent);
     }
-
+    
     return result;
   }
-
-  showCards();
+  
   showResult();
 }
 
@@ -118,7 +93,7 @@ function tiedResult() {
   return 
 }
 
-function determineTheWinner() {
+function determineTheWinner() { 
   if (result == computersResult) return tiedResult();
   if (computersResult == 21) return playerLost();
   if (result < 21 & computersResult < 21) {
@@ -140,3 +115,38 @@ stopBtn.addEventListener('click', () => {
   determineTheWinner();
   btn.removeEventListener('click', clickHitMeEvent);
 })
+
+// helper functions
+
+function showCompResult() {
+  computersResultText.innerHTML = "Computer's result is: " + computersResult + '.';
+  return computersResult;
+}
+
+function showCard(url) {
+  let img = document.createElement('img');
+  img.classList.add('image');
+  img.setAttribute('src', url);
+  imgDiv.appendChild(img);
+  
+  stylingHitMeButton();
+}
+
+function translateCardValues(cardValue, result) {
+  let imageCards = ['JACK', 'KING', 'QUEEN'];
+  let ace = 'ACE'
+  
+  switch (true) {
+    case (cardValue > 1 && cardValue <= 10):
+      return cardValue;
+    case imageCards.includes(cardValue):
+      return cardValue = 10;
+    case cardValue == ace:
+      return result > 12 ? cardValue = 1 : cardValue = 11;
+  }
+}
+
+function stylingHitMeButton() {
+  let btnText = document.querySelector('.btn-text');
+  btnText.classList.add('after')
+}
