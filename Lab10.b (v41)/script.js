@@ -46,9 +46,9 @@ async function computerPlays() {
   let cardJson = await getCardJson();
   let cardValue = cardJson.cards[0].value;
 
-  do { 
+   while (computersResult < result & computersResult < 23) { 
     computersResult += +translateCardValues(cardValue, computersResult) 
-  } while (computersResult < result & computersResult < 23)
+  }
   
 }
 
