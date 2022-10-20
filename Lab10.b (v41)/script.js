@@ -8,7 +8,7 @@ let result = 0;
 let computersResult = 0;
 let deckID = '';
 
-function stylingButton() {
+function stylingHitMeButton() {
   let btnText = document.querySelector('.btn-text');
   btnText.classList.add('after')
 }
@@ -48,7 +48,8 @@ async function computerPlays() {
 
   do { 
     computersResult += +translateCardValues(cardValue, computersResult) 
-  } while (computersResult < result)
+  } while (computersResult < result & computersResult < 23)
+  
 }
 
 function showCompResult() {
@@ -67,18 +68,24 @@ let cardJson = await getCardJson();
     img.setAttribute('src', cardImgURL);
     imgDiv.appendChild(img);
 
-    stylingButton();
+    stylingHitMeButton();
   }
 
   function showResult() {
     let cardValue = cardJson.cards[0].value;
 
     result += +translateCardValues(cardValue, result);
-    resultText.innerHTML = 'Your result is: ' + result + '.';
+    resultText.innerHTML = 'Your result is: ' + result;
 
-    if (result > 21) return playerLost();
+    if (result > 21) {
+      playerLost();
+      btn.removeEventListener('click', clickHitMeEvent);
+    }
     
-    if (result == 21) return playerWon();
+    if (result == 21) {
+      playerWon();
+      btn.removeEventListener('click', clickHitMeEvent);
+    }
 
     return result;
   }
@@ -89,7 +96,7 @@ let cardJson = await getCardJson();
 
 // if player wins (display changes)
 function playerWon() {
-  resultText.innerHTML += ' Congrats, you won! <span>&#129395</span>';
+  resultText.innerHTML += '.  Congrats, you won! <span>&#129395</span>';
   playAgainBtn.classList.remove('hidden');
   stopBtn.classList.add('hidden');
   return 
@@ -97,7 +104,7 @@ function playerWon() {
 
 // if player looses (display changes)
 function playerLost() {
-  resultText.innerHTML += ' Sorry, you lost! <span>&#129322</span>';
+  resultText.innerHTML += '.  Sorry, you lost! <span>&#129322</span>';
   playAgainBtn.classList.remove('hidden');
   stopBtn.classList.add('hidden');
   return
@@ -105,31 +112,31 @@ function playerLost() {
 
 // in case of a tie
 function tiedResult() {
-  resultText.innerHTML += " It's a tie! <span>&#128558</span> Try again!";
+  resultText.innerHTML += ".  It's a tie! <span>&#128558</span> Try again!";
   playAgainBtn.classList.remove('hidden');
   stopBtn.classList.add('hidden');
   return 
 }
 
 function determineTheWinner() {
-  if (result == 21 & computersResult == 21) return tiedResult();
   if (result == computersResult) return tiedResult();
-
   if (computersResult == 21) return playerLost();
-
   if (result < 21 & computersResult < 21) {
     ((21 - result) < (21 - computersResult)) ? playerWon() : playerLost();
   }
   if (result < 21 & computersResult > 21) return playerWon();
 }
 
-btn.addEventListener('click', () => { 
+function clickHitMeEvent() {
   currentCardPlayer();
   computerPlays();
   stopBtn.style.visibility = 'visible';
-})
+}
+
+btn.addEventListener('click', clickHitMeEvent);
 
 stopBtn.addEventListener('click', () => {
   showCompResult();
   determineTheWinner();
+  btn.removeEventListener('click', clickHitMeEvent);
 })

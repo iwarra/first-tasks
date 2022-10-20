@@ -13,6 +13,7 @@
 
 h1 {
   margin: .5em; 
+  font-size: 2.5rem;
 }
 
 .container {
@@ -55,7 +56,7 @@ h1 {
 }
 
 .result-text.show{
-  font-size: 1.3rem;
+  font-size: 1.8rem;
 }
 
 .hidden {
@@ -63,23 +64,34 @@ h1 {
 }
 
 .play-again-btn {
-  margin: .5em; 
+  margin: .6em; 
   font-size: 1.3rem;
   padding: .5em;
-  border: .5px solid green;
-  border-radius: 8px;
+  font-weight: 700;
+  background-color: rgba(240, 236, 236, 0.675);
+  border: 2px solid var(--red);
+  border-radius: 5px;
   cursor: pointer;
+  box-shadow: 5px 6px 9px 2px rgba(0,0,0,0.22);
+  -webkit-box-shadow: 5px 6px 9px 2px rgba(0,0,0,0.22);
+  -moz-box-shadow: 5px 6px 9px 2px rgba(0,0,0,0.22);
 }
 
 .stop-btn {
   visibility: hidden;
-  margin: .5em;
-  padding-inline: 1em;
-  padding-block: .2em;
-  font-size: 1.1em;
-  border: .5px solid green;
-  border-radius: 8px;
+  color: rgb(2, 71, 2);
+  margin-inline: .6em;
+  padding-inline: 1.3rem;
+  padding-block: .25em;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background-color:  rgba(240, 236, 236, 0.675);
+  border: 2px solid var(--red);
+  border-radius: 5px;
   cursor: pointer;
+  box-shadow: 5px 6px 9px 2px rgba(0,0,0,0.22);
+  -webkit-box-shadow: 5px 6px 9px 2px rgba(0,0,0,0.22);
+  -moz-box-shadow: 5px 6px 9px 2px rgba(0,0,0,0.22);
 }
 
 .computer-result {
@@ -87,5 +99,5 @@ h1 {
 }
 
 .computer-result-text.show{
-  font-size: 1.3rem;
+  font-size: 1.8rem;
 }
