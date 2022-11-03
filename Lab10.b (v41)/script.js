@@ -12,7 +12,7 @@ async function getDeck(nrOfDecks) {
   let deck = await fetch ('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=' + nrOfDecks);
   let deckJson = await deck.json();
   deckID = deckJson.deck_id;
-  console.log(deckID)
+  console.log("getDeck", deckID)
   return deckID
 }
 
