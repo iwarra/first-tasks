@@ -37,7 +37,7 @@ function showTask(input) {
   dateSpan.classList = 'date' ;
   
   taskSpan.innerText = input.task;
-  dateSpan.innerText = input.date.slice(0, 15);
+  dateSpan.innerText = input.date.slice(0, 10);
   
   taskDiv.append(taskSpan)
   taskDiv.append(dateSpan)
