@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import * as controller from "./controller.js"
 import mongoose from 'mongoose';
 import 'dotenv/config';
@@ -11,9 +10,9 @@ const app = express();
 const PORT = 3000;
 const serverURI = 'http://localhost:' + PORT;
 const mongoURI = process.env.MONGO_URI
-const jsonParser = bodyParser.json()
 
 app.use(cors())
+app.use(express.json());
 // End on important variables
 
 // Routes
@@ -22,23 +21,24 @@ app.get('/getdatabase', (req, res) => {
   controller.getDatabase().then(answer => res.json(answer))
 })
 
-app.put('/check', jsonParser, (req, res) => {
+app.put('/check',  (req, res) => {
   controller.check(req.body)
 })
 
-app.post('/structuredata', jsonParser, (req, res) => {
+app.post('/structuredata',  (req, res) => {
   res.json(controller.structureData(req.body.task))
 })
 
-app.post('/save', jsonParser, (req, res) => {
+app.post('/save',  (req, res) => {
   const { id, task, date, checked } = req.body
   controller.save(id, task, date, checked)
 
   res.send()
 })
 
-app.delete('/delete', jsonParser, (req, res) => {
-  controller.deleteTask(req.body.id)
+app.delete('/delete/:id',  (req, res) => {
+  let nrId = Number((req.params.id.slice(1)))
+  controller.deleteTask(nrId)
 })
 
 // End of routes

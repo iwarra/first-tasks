@@ -51,13 +51,9 @@ async function save(modifiedTask) {
 
 async function deleteTask(id) {
   const { url, PORT } = backendURL;
-  const endpoint = '/delete';
+  const endpoint = `/delete/:${id}`;
   fetch(`${url}:${PORT}${endpoint}`, {
     method: 'DELETE',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ id }),
   })
 }
 

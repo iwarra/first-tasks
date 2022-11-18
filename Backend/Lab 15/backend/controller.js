@@ -13,7 +13,6 @@ async function getDatabase() {
   return await Task.find()
 }
 
-
 function saveInput(id, task, date, checked) {
   Task.create({
     id,
