@@ -36,7 +36,7 @@ export default {
     margin-inline: 5px;
   }
 
-  a:hover{
+  a:hover {
     color: #41b883;
     transition: 0.2s;
   }
@@ -54,6 +54,10 @@ export default {
 
   li {
     display: block;
+  }
+
+  ul {
+    margin-bottom: 5px;
   }
 }
 </style>

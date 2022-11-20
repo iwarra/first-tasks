@@ -33,7 +33,7 @@
     padding: 3rem;
   }
 
-  h1{
+  h1 {
     color: rgba(255, 255, 255, 0.971);
     margin-bottom: .3rem;
   }

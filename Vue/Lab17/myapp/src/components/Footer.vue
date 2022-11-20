@@ -25,4 +25,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 700px) {
+  .footer {
+    font-size: small;
+    height: 6vh;
+  }
+}
 </style>
