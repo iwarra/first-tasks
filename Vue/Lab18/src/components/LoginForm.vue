@@ -16,7 +16,7 @@
 <script>
   export default {
     name: 'LoginForm',
-    props: [ "isVisible" ],
+    props: [ "isVisible"],
     data() {
       return {
         username:'',
@@ -43,7 +43,10 @@
           password: this.password
         }
 
+        localStorage.setItem('user', JSON.stringify(user))
+
         this.$emit('submited', user.username);
+        console.log(user)
         
         this.username = ''
         this.password = ''
@@ -77,7 +80,7 @@
 
   .btn {
     border: .5px solid rgb(208, 205, 205);
-    padding: .7em 1.3em;
+    padding: .5em 2em;
     border-radius: 8px;
     background-color: #ffffff;
     font-size: large;

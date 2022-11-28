@@ -1,14 +1,15 @@
 <template>
   <Navbar :loginSwitch="loginSwitch"
           :logoutSwitch="logoutSwitch"
-          :name="name" 
+          :name="name"
           @logout-clicked="() => {
             isVisible = !isVisible;
             loginSwitch = !loginSwitch;
             logoutSwitch = !logoutSwitch;
+            removeStorage
           }"/>
 
-  <LoginForm :isVisible="isVisible" 
+  <LoginForm :isVisible="isVisible"
               @submited="(username) => {
                 isVisible = !isVisible;
                 loginSwitch = !loginSwitch;
@@ -32,7 +33,12 @@ import LoginForm from './components/LoginForm.vue';
         isVisible: true,
         loginSwitch: true,
         logoutSwitch: false,
-        name: '',
+        name: "",
+      }
+    },
+    computed: {
+      removeStorage() {
+        localStorage.removeItem('user')
       }
     }
   }
