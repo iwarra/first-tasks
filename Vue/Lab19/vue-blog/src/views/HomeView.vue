@@ -3,13 +3,13 @@
     <h1>Ten latest posts</h1>
     <ul v-for="preview in previews" :key="preview.id" class="preview-list">
     <li>
-      <h2> {{ preview.title }} </h2>
+      <h2> {{ preview.title}} </h2>
       <p>{{ preview.summary }}</p> 
-      <button class="btn">Read more</button>
+      <button class="btn" @click="$emit('button-clicked', preview.id)">Read more</button>
     </li>
     </ul>
 </div>
-</template>
+</template> 
 
 
 <script>

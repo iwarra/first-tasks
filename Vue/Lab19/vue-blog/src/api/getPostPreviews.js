@@ -12,7 +12,7 @@ function createPostObj(res) {
   let array = []
   res.forEach(element => {
     let obj = {
-      _id: element.id,
+      id: element.id,
       title: element.title.rendered, 
       summary: element.excerpt.rendered.replaceAll(/(<p>)|(<\/p>)/g, ""),
       link: element.link

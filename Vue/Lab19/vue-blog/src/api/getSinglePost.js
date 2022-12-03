@@ -13,6 +13,14 @@ async function getPost(endpoint = "posts", id) {
   }
 }
 
+function formatPost(result) {
+  let title = result.title
+  let content = htmlParser(result.article)
+  .map(elem => placeContent(elem))
+  .join("")
+  console.log(content)
+}
+
 function placeContent(content) {
   const {tagName, textContent, children, link} = content
 
@@ -66,5 +74,6 @@ export {
   getPost,
   htmlParser,
   placeContent,
+  formatPost,
 }
 

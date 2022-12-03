@@ -1,7 +1,8 @@
 <template>
     <Navbar />
     <div class="wrapper">
-      <RouterView />
+      <span>{{ articleID }}</span>
+      <RouterView :sendID="articleID" @button-clicked="(id) => { articleID = id }" />
     </div>
     <Footer />
 </template>
@@ -14,6 +15,12 @@ import Footer from './components/Footer.vue';
     components: {
       Navbar,
       Footer
+    },
+    data() {
+      return {
+        articleID: "",
+        sendID: '',
+      }
     }
   }
 </script>

@@ -6,31 +6,26 @@
 </template>
 
 <script>
-import { getPost, htmlParser, placeContent } from '../api/getSinglePost'
+import { getPost, formatPost } from '../api/getSinglePost'
 
   export default {
+    props: ['sendID'],
     data() {
       return {
         title: "",
         content: "",
-        id: "",
       }
     },
     mounted() {
-      getPost('posts', 5410).then(result => {
-        this.title = result.title
-        this.id = result.id
-/*         console.log(htmlParser(result.article)) */
-        this.content = htmlParser(result.article)
-          .map(elem => placeContent(elem))
-          .join("")
-      })
-    },
+      getPost('posts', this.sendID).then(result => {
+        console.log(this.sendID)
+        formatPost(result)})
+      }
   }
+  
 </script>
 
 <style>
-
   img {
     width: 100%;
   }
