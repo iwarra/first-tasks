@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <h1> {{ title }} </h1>
-    <div v-html="content" class="content"></div>
+    <article v-html="content" class="content"></article>
   </div>
 </template>
 
@@ -24,18 +24,10 @@ import { getPost, formatPost } from '../api/getSinglePost'
       })
     }
   }
-  
 </script>
 
 <style>
   img {
     width: 100%;
-  }
-  h1 {
-    margin-block: 1.5rem;
-  }
-
-  h3 {
-    padding-top: 1rem;
   }
 </style>

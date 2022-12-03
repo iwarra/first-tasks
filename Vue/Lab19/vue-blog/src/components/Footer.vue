@@ -6,7 +6,6 @@
 
 <script>
   export default {
-    
     data() {
       return {
         date: new Date().getFullYear(),
@@ -23,6 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 2rem;
   }
 
 </style>

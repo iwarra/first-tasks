@@ -20,3 +20,23 @@ body, #app {
   flex-direction: column;
   gap: 1.5rem;
 }
+
+.btn {
+  cursor: pointer;
+  padding: .3em .5em;
+  margin-top: .5em;
+  background-color: #eee;
+  border: .5px rgb(149, 149, 149) solid;
+  border-radius: 5px;
+  color: #ca2bd0;
+  transition: .5s;
+}
+
+.btn:hover {
+  background-color: rgb(248, 244, 244);
+  transition: .5s;
+}
+
+h1 {
+  margin-block: 1.5rem;
+}

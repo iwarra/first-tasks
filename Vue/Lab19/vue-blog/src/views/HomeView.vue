@@ -4,13 +4,12 @@
     <ul v-for="preview in previews" :key="preview.id" class="preview-list">
     <li>
       <h2> {{ preview.title}} </h2>
-      <p>{{ preview.summary }}</p> 
+      <span>{{ preview.summary }}</span> 
       <button class="btn" @click="$emit('button-clicked', preview.id)">Read more</button>
     </li>
     </ul>
 </div>
 </template> 
-
 
 <script>
 import { getPostsToPreview, createPostObj } from '../api/getPostPreviews'
@@ -32,20 +31,5 @@ import { getPostsToPreview, createPostObj } from '../api/getPostPreviews'
 <style scoped>
   li {
     list-style: none;
-  }
-
-  .btn {
-    cursor: pointer;
-    padding: .3em .5em;
-    margin-top: .5em;
-    background-color: #eee;
-    border: .5px gray solid;
-    border-radius: 5px;
-    color: #ca2bd0;
-    transition: .5s;
-  }
-  .btn:hover {
-    background-color: rgb(248, 244, 244);
-    transition: .5s;
   }
 </style>

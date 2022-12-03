@@ -18,7 +18,7 @@
 <style scoped>
   .navigation {
     display: flex;
-    background-color: #fcfafb;
+    background-color: #fdfbfc;
     align-items: center;
     justify-content: space-between;
     padding-inline: 3em;
