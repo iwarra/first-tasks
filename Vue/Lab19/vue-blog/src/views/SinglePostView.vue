@@ -18,9 +18,11 @@ import { getPost, formatPost } from '../api/getSinglePost'
     },
     mounted() {
       getPost('posts', this.sendID).then(result => {
-        console.log(this.sendID)
-        formatPost(result)})
-      }
+        let obj = formatPost(result)
+        this.title = obj.title;
+        this.content = obj.content
+      })
+    }
   }
   
 </script>

@@ -1,8 +1,10 @@
 <template>
     <Navbar />
     <div class="wrapper">
-      <span>{{ articleID }}</span>
-      <RouterView :sendID="articleID" @button-clicked="(id) => { articleID = id }" />
+      <RouterView :sendID="articleID" 
+                  @button-clicked="(id) => { articleID = id
+                  this.$router.push('/view-post')
+                  }" />
     </div>
     <Footer />
 </template>

@@ -18,7 +18,11 @@ function formatPost(result) {
   let content = htmlParser(result.article)
   .map(elem => placeContent(elem))
   .join("")
-  console.log(content)
+  let article = {
+    title,
+    content
+  }
+  return article
 }
 
 function placeContent(content) {
