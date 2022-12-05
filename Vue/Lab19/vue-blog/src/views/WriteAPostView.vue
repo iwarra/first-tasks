@@ -39,10 +39,4 @@ import { postAnArticle } from '../api/postArticle'
     gap: 1em;
   }
 
-  .article {
-    border: .5px solid rgb(170, 169, 169);
-    border-radius: 5px;
-    padding: .5rem;
-    box-shadow: 10px 10px 14px -3px rgba(0,0,0,0.1);
-  }
 </style>
