@@ -1,10 +1,10 @@
 <template>
 <nav class="navigation">
-  <img src="https://thesmokedetector.net/wp-content/uploads/2017/12/102005.jpg" alt="TSD logo">
+  <a href="/"><img src="https://thesmokedetector.net/wp-content/uploads/2017/12/102005.jpg" alt="TSD logo"></a>
   <ul class="links">
     <li> <RouterLink to="/" class="link">Home</RouterLink> </li>
     <li> <RouterLink to="/write-post" class="link">Write</RouterLink> </li>
-    <li> <RouterLink to="/view-post" class="link">Read</RouterLink> </li>
+   <!--  <li> <RouterLink to="/view-post" class="link">Read</RouterLink> </li> -->
   </ul>
 </nav>
 </template>
@@ -39,6 +39,10 @@
 
   .link {
     color: #ca2bd0;
+  }
+
+  .link:hover {
+    color: rgb(103, 4, 179);
   }
 
 </style>

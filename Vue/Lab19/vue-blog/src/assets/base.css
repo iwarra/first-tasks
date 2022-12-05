@@ -23,13 +23,14 @@ body, #app {
 
 .btn {
   cursor: pointer;
-  padding: .3em .5em;
+  padding: .3em .9em;
   margin-top: .5em;
   background-color: #eee;
   border: .5px rgb(149, 149, 149) solid;
   border-radius: 5px;
   color: #ca2bd0;
   transition: .5s;
+  align-self: start;  
 }
 
 .btn:hover {

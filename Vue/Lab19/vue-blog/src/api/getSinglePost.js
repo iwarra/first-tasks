@@ -1,28 +1,21 @@
-const wordpressAPI = "https://thesmokedetector.net/wp-json/wp/v2"
+/* const wordpressAPI = "https://thesmokedetector.net/wp-json/wp/v2" */
+const wordpressAPI = "https://tsd.kwikly.info/wp-json/wp/v2"
 const allOrigins = `https://api.allorigins.win/raw?url=${encodeURIComponent(wordpressAPI)}`
 
-//function to get one specific post with an id
+//function to get one specific post with an id 
 async function getPost(endpoint = "posts", id) {
+  if (id === '') id = localStorage.getItem('storedID')
+
   let postRequest = await fetch(`${allOrigins}/${endpoint}/${id}`)
   if (!postRequest.ok) throw Error("Request is not ok")
   let post = await postRequest.json()
-  return {
+  let data = {
     id: post.id,
     title: post.title.rendered,
     article: post.content.rendered
   }
-}
-
-function formatPost(result) {
-  let title = result.title
-  let content = htmlParser(result.article)
-  .map(elem => placeContent(elem))
-  .join("")
-  let article = {
-    title,
-    content
-  }
-  return article
+  localStorage.setItem('storedID', data.id)
+  return data
 }
 
 function placeContent(content) {
@@ -54,7 +47,6 @@ function placeContent(content) {
   return `<${tagName}>${textContent}</${tagName}>`
 }
 
-
 function htmlParser(content) {
   let data = new window.DOMParser().parseFromString(content, "text/html")
   data = [...data.all]
@@ -73,6 +65,19 @@ function htmlParser(content) {
     })
   return data
 }
+
+function formatPost(result) {
+  let title = result.title
+  let content = htmlParser(result.article)
+  .map(elem => placeContent(elem))
+  .join("")
+  let article = {
+    title,
+    content
+  }
+  return article
+}
+
 
 export {
   getPost,
