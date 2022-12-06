@@ -38,5 +38,4 @@ import { postAnArticle } from '../api/postArticle'
     flex-direction: column;
     gap: 1em;
   }
-
 </style>

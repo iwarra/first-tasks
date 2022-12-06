@@ -2,8 +2,8 @@
 <nav class="nav-bar">
   <a href="/"><img src="https://thesmokedetector.net/wp-content/uploads/2017/12/102005.jpg" alt="TSD logo"></a>
   <ul class="links">
-    <li> <RouterLink to="/" class="link">Home</RouterLink> </li>
-    <li> <RouterLink to="/write-post" class="link">Write</RouterLink> </li>
+    <li> <RouterLink to="/" class="link"> Home </RouterLink> </li>
+    <li> <RouterLink to="/write-post" class="link"> Write </RouterLink> </li>
   </ul>
 </nav>
 </template>
@@ -42,10 +42,6 @@
 
   .link:hover {
     color: rgb(103, 4, 179);
-  }
-
-  .search {
-    display: flex;  
   }
 
 </style>
