@@ -1,12 +1,12 @@
 <template>
   <div class="page">
     <h1>Ten latest posts</h1>
-    <input v-model="filter" class="article" type="text" placeholder="Search..">
+    <input v-model="filter" class="input" type="text" placeholder="Search...">
     <ul class="article-list">
-    <li v-for="preview in results()" :key="preview.id" class="preview-list">
-      <h2> {{ preview.title}} </h2>
-      <span>{{ preview.summary }}</span> 
-      <button class="btn" @click="$emit('button-clicked', preview.id)">Read more</button>
+    <li v-for="post in results()" :key="post.id" class="preview-list">
+      <h2> {{ post.title}} </h2>
+      <span>{{ post.summary }}</span> 
+      <button class="btn" @click="$emit('button-clicked', post.id)">Read more</button>
     </li>
     </ul>
 </div>

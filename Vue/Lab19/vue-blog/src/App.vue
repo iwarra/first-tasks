@@ -1,22 +1,22 @@
 <template>
-    <Navbar />
+    <TheNavbar />
     <div class="wrapper">
       <RouterView :sendID="articleID" 
                   @button-clicked="(id) => { articleID = id
                   this.$router.push('/view-post')
                   }" />
     </div>
-    <Footer />
+    <TheFooter />
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue';
-import Footer from './components/Footer.vue';
+import TheNavbar from './components/TheNavbar.vue';
+import TheFooter from './components/TheFooter.vue';
 
   export default {
     components: {
-      Navbar,
-      Footer
+      TheNavbar,
+      TheFooter,
     },
     data() {
       return {
