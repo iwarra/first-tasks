@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { getPost, formatPost } from '../api/getSinglePost'
+import { getPost, formatPost } from '../api/getSinglePost.js'
 
   export default {
     props: ['sendID'],

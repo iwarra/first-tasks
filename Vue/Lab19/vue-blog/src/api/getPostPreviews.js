@@ -1,5 +1,4 @@
-/* const wordpressAPI = "https://thesmokedetector.net/wp-json/wp/v2" */
-const wordpressAPI = "https://tsd.kwikly.info/wp-json/wp/v2"
+const wordpressAPI = "https://thesmokedetector.net/wp-json/wp/v2"
 const allOrigins = `https://api.allorigins.win/raw?url=${encodeURIComponent(wordpressAPI)}` 
 
 async function getPostsToPreview(endpoint = "posts") {

@@ -2,12 +2,12 @@
   <div class="page">
     <h1>Ten latest posts</h1>
     <input v-model="filter" class="input" type="text" placeholder="Search...">
-    <ul class="article-list">
-    <li v-for="post in results" :key="post.id" class="preview-list">
-      <h2> {{ post.title}} </h2>
-      <span>{{ post.summary }}</span> 
-      <button class="btn" @click="$emit('button-clicked', post.id)">Read more</button>
-    </li>
+    <ul class="article">
+      <li v-for="post in results" :key="post.id">
+        <h2> {{ post.title}} </h2>
+        <span>{{ post.summary }}</span> 
+        <button class="btn" @click="$emit('button-clicked', post.id)">Read more</button>
+      </li>
     </ul>
 </div>
 </template> 
@@ -42,16 +42,15 @@ import { getPostsToPreview, createPostObj } from '../api/getPostPreviews'
 </script>
 
 <style scoped>
-  .article-list {
+  .article {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.1rem;
   }
 
   li {
     display: flex;
     flex-direction: column;
     gap: .3rem;
-    list-style: none; 
   }
 </style>

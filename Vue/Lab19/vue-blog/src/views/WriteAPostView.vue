@@ -2,9 +2,9 @@
   <div class="page">
     <h1>Add a new post</h1>
     <form class="form">
-      <label for="article">Write a post:</label>
-      <input v-model="articleTitle" type="text" name="article" placeholder="Article title" autofocus class="input">
-      <textarea v-model="articleText" name="article" class="input" placeholder="Your article..." cols="70" rows="15"></textarea>
+      <label for="title">Write a post:</label>
+      <input v-model="articleTitle" type="text" id="title" name="articleTitle" placeholder="Article title" autofocus class="input">
+      <textarea v-model="articleText" name="articleText" class="input" placeholder="Your article..."></textarea>
       <button class="btn add" @click.prevent="sendData">Add</button>
     </form>
   </div>

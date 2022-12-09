@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <span> Copyright &copy Josipovic Ivona {{date}}</span>
+    <span> Copyright &copy Josipovic Ivona {{ date }} </span>
   </footer>
 </template>
 

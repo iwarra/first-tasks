@@ -2,7 +2,8 @@
     <TheNavbar />
     <div class="wrapper">
       <RouterView :sendID="articleID" 
-                  @button-clicked="(id) => { articleID = id
+                  @button-clicked="(id) => { 
+                  articleID = id;
                   this.$router.push('/view-post')
                   }" />
     </div>
