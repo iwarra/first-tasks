@@ -5,7 +5,7 @@
       <label for="article">Write a post:</label>
       <input v-model="articleTitle" type="text" name="article" placeholder="Article title" autofocus class="input">
       <textarea v-model="articleText" name="article" class="input" placeholder="Your article..." cols="70" rows="15"></textarea>
-      <button class="btn" @click.prevent="sendData">Add</button>
+      <button class="btn add" @click.prevent="sendData">Add</button>
     </form>
   </div>
 </template>
@@ -37,5 +37,16 @@ import { postAnArticle } from '../api/postArticle'
     display: flex;
     flex-direction: column;
     gap: 1em;
+  }
+
+  textarea {
+    resize: none;
+    height: 250px;
+    overflow: auto;
+  }
+
+  .add {
+    width: 100px;
+    font-weight: 600;
   }
 </style>
