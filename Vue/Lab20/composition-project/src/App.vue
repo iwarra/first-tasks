@@ -20,6 +20,8 @@
 </script>
 
 <style>
+  @import "../src/assets/base.css";
+
   #app {
     display: flex;
     flex-direction: column;
@@ -30,7 +32,7 @@
   .wrapper {
     display: flex;
     flex: 1;
-    max-width: 960px;
+    max-width: 1200px;
     align-self: center;
   }
 </style>

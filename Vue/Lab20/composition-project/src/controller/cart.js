@@ -1,29 +1,33 @@
-function createProductObj(sku) {
-  let product = {
+import { add, getAll, update, inArchive, remove, getItem } from "./storage"
+
+function createProductObj(sku, qty, price) {
+  return {
     sku,
-    quantity: 1
+    qty,
+    price
   }
-  return product
 }
 
-function storeProductObj(obj) {
-//what if that product is already in the cart?
-  let array = JSON.parse(localStorage.getItem('inCart')) || []
-  array = [...array, obj]
-  localStorage.setItem('inCart', JSON.stringify(...array))
+function addToCart(sku, qty = 1, price) {
+  if (inArchive('inCart', 'sku', sku)) {
+    const item = getItem('inCart', 'sku', sku)
+    qty += item.qty
+    // need to explain why this exists
+    remove('inCart', 'sku', sku)
+  }
+  add('inCart', createProductObj(sku, qty, price))
 }
 
-//used to update qty if we click on add to cart more times
-function updateQuantity(obj) {
-  let updatedObj = obj;
-  updatedObj.quantity += 1;
-  return updatedObj
+function countTotal(storageItem, key) {
+  let allProducts = getAll(storageItem)
+  let total = allProducts.reduce((previous, current) => {
+    return previous + current[key]
+  }, 0)
+   return key === 'price' ? total.toFixed(2) : total;
 }
 
-function addToCart(sku) {
-  storeProductObj(createProductObj(sku))
-}
 
 export { 
   addToCart,
+  countTotal
 } 

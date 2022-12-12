@@ -1,18 +1,13 @@
 <template>
-  <div class="card">
-    <h2> {{ productName }}</h2>
-    <div class="product-group">
-      <img src="../../public/No_image_available.svg.png" alt="">
-      <div class="info">
-        <span> {{ producer }} </span>
-        <span> SKU: {{ sku }}</span>
-        <span class="clickable">Read more</span>
-      </div>
-    </div>
-    <div class="buy">
-      <span> Price: {{ price }} € </span>
-      <span @click="addToCart(sku)" class="cart-btn">Add to cart &#128722;</span>
-    </div>
+  <img src="../../public/woocommerce-placeholder.png" alt="">
+  <div>
+    <h2>{{ productName }}</h2>
+    <em class="sku">SKU: {{ sku }}</em>
+  </div>
+  <span>Stock: {{ Stock }}</span>
+  <div class="buy"> 
+    <span class="price">{{ price }} €</span>
+    <span @click="addToCart(sku, qty, price)" class="cart-btn">Add to cart &#128722;</span>
   </div>
 </template>
 
@@ -23,64 +18,51 @@ import { addToCart } from '../controller/cart.js'
     name: 'ProductInfo',
     props: [ 'product' ],
     setup(props) {
-      const { Producer: producer, SKU: sku, EUR: price } = props.product
-      const productName = props.product['Name of product'] 
+      const { Producer: producer, SKU: sku, EUR: price, Stock } = props.product
+      const productName = props.product['Name of product']
 
-      return { producer, sku, price, productName, addToCart }
-
+      return { producer, sku, price, productName, Stock, addToCart }
     }
   }
 </script>
 
 <style scoped>
-  .card {
-    display: flex;
-    flex-direction: column;
-    border: .3px solid rgb(228, 224, 224);
-    gap: 1em;
-    align-items: center;
-    padding-bottom: 1em;
-    margin-bottom: 1em;
-  }
-  .product-group {
-    min-width: 500px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .buy {
-    display: flex;
-    flex-direction: column;
-    gap: .5em;
-    align-items: center;
-    cursor: pointer;
-  }
- .info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .5em;
-  }
-  span {
-    align-self: center;
-    cursor: pointer;
+
+  h2 {
+    font-size: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   
   img {
-    max-width: 100px;
+    width: 100%;
+  }
+
+  .buy {
+    display:flex;
+    flex-direction:column;
+    align-items: start;
+    gap: .5em;
   }
 
   .cart-btn {
     border: .3px solid rgb(184, 182, 182);
-    padding: 5px 8px;
+    padding: .5rem .9rem;
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgb(241, 238, 238);
+    background-color: rgb(252, 251, 251);
   }
 
-  .clickable {
-    cursor: pointer;
+  .price {
     font-weight: 600;
+    font-size: 1.5rem;
+    color: rgb(245, 149, 5);
   }
+
+  .sku {
+    color: gray;
+    font-size: .9rem;
+  }
+
 </style>
