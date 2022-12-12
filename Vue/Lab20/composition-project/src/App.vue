@@ -1,40 +1,36 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-    <router-link to="/products">Products</router-link>
-    <router-link to="/checkout" >Checkout</router-link>
-  </nav>
+  <TheHeader />
   <div class="wrapper">
     <router-view/>
   </div>
-  <footer>
-    <span>All rights reserved</span>
-  </footer>
+  <TheFooter />
 </template>
+
+<script>
+  import TheHeader from './components/TheHeader.vue';
+  import TheFooter from './components/TheFooter.vue';
+
+  export default {
+    components: {
+      TheHeader,
+      TheFooter
+    }
+  }
+
+</script>
 
 <style>
   #app {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
   }
-  nav {
-     display: flex;
-     gap: 1rem;
-     align-items: center;
-     justify-content: center;
-     background-color: #eee;
-     min-height: 80px;
-  }
-  footer {
-    background-color: #eee;
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  
   .wrapper {
     display: flex;
     flex: 1;
+    max-width: 960px;
+    align-self: center;
   }
 </style>
