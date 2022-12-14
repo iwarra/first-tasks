@@ -7,24 +7,21 @@
       <router-link to="/" class="link">Home</router-link>
       <router-link to="/products" class="link">Products</router-link>
       <router-link to="/checkout" class="cart">
-        <span class="qty">{{ totalQty }}</span>
+        <span class="qty">{{ cartTotal }}</span>
         <span class="icon">&#128722;</span>
-        <!-- <span class="text">{{ totalPrice }} €</span> -->
       </router-link>
     </nav>
   </header>
 </template>
 
 <script>
-  import { countTotal } from '../controller/cart';
+import { inject } from 'vue' 
 
   export default {
     name: 'TheHeader',
     setup() {
-      //need to make reactive
-      let totalQty = countTotal('inCart', 'qty');
-      
-      return { totalQty }
+      const { cartTotal } = inject("cartTotal")
+      return { cartTotal }
     }
   }
 </script>

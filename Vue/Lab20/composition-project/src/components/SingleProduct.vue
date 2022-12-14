@@ -8,9 +8,9 @@
           <h2>{{ productName }}</h2>
           <span>Stock: {{ Stock }}</span>
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod tempora alias rerum ad laborum! Distinctio eveniet neque, doloribus dicta numquam dolor consequatur, vitae, iure repudiandae eos inventore ratione nulla repellendus.</p>
-          <div class="call-to-action">
-            <span class="price">Price: {{ price }} €</span>
-            <button class="cart-btn">Add to cart &#128722;</button>
+          <div class="call-to-action" >
+            <span class="price">Price: {{ priceFormated }}</span>
+            <button class="cart-btn" v-if="Stock > 0" @click="addToCartClicked()">Add to cart &#128722;</button>
           </div>
         </div>
     </div>
@@ -18,14 +18,24 @@
 </template>
 
 <script>
+import { addToCart, countTotal } from '../controller/cart.js';
+import { inject } from 'vue';
+
 export default {
   props: [ 'product' ],
   setup(props) {
     let { Producer: producer, SKU: sku, EUR: price, Stock } = props.product
-    const productName = props.product['Name of product']
     producer = producer.toUpperCase()
+    const productName = props.product['Name of product']
+    const priceFormated = new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(price)
+    
+    const { setCartTotal } = inject("cartTotal")
+    function addToCartClicked() {
+      addToCart(sku, price)
+      setCartTotal(countTotal('inCart', 'qty'))
+    }
 
-    return { producer, sku, price, productName, Stock }
+    return { producer, sku, price, productName, Stock, priceFormated, addToCartClicked }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <TheHeader />
+  <TheHeader/>
   <div class="wrapper">
     <router-view/>
   </div>
@@ -9,11 +9,26 @@
 <script>
   import TheHeader from './components/TheHeader.vue';
   import TheFooter from './components/TheFooter.vue';
+  import { ref, provide } from 'vue'
+  import { countTotal } from '../src/controller/cart';
 
   export default {
     components: {
       TheHeader,
       TheFooter
+    },
+    setup() {
+      const cartTotal = ref(countTotal('inCart', 'qty'))
+
+      function setCartTotal(newCartQty) {
+        cartTotal.value = newCartQty
+      }
+
+      provide('cartTotal', {
+        cartTotal,
+        setCartTotal
+      })
+
     }
   }
 </script>

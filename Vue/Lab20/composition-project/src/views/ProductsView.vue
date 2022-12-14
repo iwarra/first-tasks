@@ -2,23 +2,25 @@
   <div>
     <h1>Our coffee universe </h1>
     <div class="container">
-      <div class="card" v-for="product in products" @click="openProductPage(product.SKU)">
-        <ProductInfo :product="product"/>
+      <div class="card" v-for="product in products" 
+      @click="openProductPage($event, product.SKU)">
+        <ProductCard :product="product"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ProductInfo from '@/components/ProductInfo.vue';
+import ProductCard from '@/components/ProductCard.vue';
 import products from '../data/products.json'
 import { useRouter } from 'vue-router';
 
 export default { 
-  components: { ProductInfo },
+  components: { ProductCard },
   setup() {
     const router = useRouter();
-    function openProductPage(productSKU) {
+    function openProductPage(event, productSKU) {
+      if (event.target.localName === 'button') return
       router.push({ name: 'product', params: { sku: productSKU } })
     }
 

@@ -1,14 +1,14 @@
 <template>
-  <TheProduct :product="product"/>
+  <SingleProduct :product="product"/>
 </template>
 
 <script>
-  import TheProduct from '@/components/TheProduct.vue';
+  import SingleProduct from '@/components/SingleProduct.vue';
   import { useRoute } from 'vue-router'; 
   import products from '../data/products.json';
 
   export default {
-    components: { TheProduct },
+    components: { SingleProduct },
     setup() {
       const route = useRoute()
       const routeSku = route.params.sku
