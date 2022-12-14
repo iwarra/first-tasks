@@ -1,5 +1,5 @@
 <template>
-  <img src="../../public/woocommerce-placeholder.png" alt="">
+  <img src="../../public/image-placeholder.png" alt="no photo available">
   <div>
     <h2>{{ productName }}</h2>
     <em class="sku">SKU: {{ sku }}</em>
@@ -27,7 +27,6 @@ import { addToCart } from '../controller/cart.js'
 </script>
 
 <style scoped>
-
   h2 {
     font-size: 100%;
     overflow: hidden;
@@ -57,12 +56,11 @@ import { addToCart } from '../controller/cart.js'
   .price {
     font-weight: 600;
     font-size: 1.5rem;
-    color: rgb(245, 149, 5);
+    color: var(--clr-accent);
   }
 
   .sku {
     color: gray;
     font-size: .9rem;
   }
-
 </style>

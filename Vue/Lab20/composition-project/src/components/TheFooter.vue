@@ -12,8 +12,9 @@
 
 <style scoped>
   footer {
-    background-color: #eee;
-    min-height: 80px;
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
+    min-height: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;

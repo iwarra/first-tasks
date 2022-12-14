@@ -1,28 +1,30 @@
 <template>
   <header>
-    <img src="../../public/icons8-warm-drink-64.png" alt="">
+    <a href="/"> 
+      <img src="../../public/logo.png" alt="Logo">
+    </a>
     <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/products">Products</router-link>
+      <router-link to="/" class="link">Home</router-link>
+      <router-link to="/products" class="link">Products</router-link>
       <router-link to="/checkout" class="cart">
-        <span class="qty">{{totalQty}}</span>
+        <span class="qty">{{ totalQty }}</span>
         <span class="icon">&#128722;</span>
-        <span>{{ totalPrice }} €</span>
+        <!-- <span class="text">{{ totalPrice }} €</span> -->
       </router-link>
     </nav>
   </header>
 </template>
 
 <script>
-  import {countTotal} from '../controller/cart';
- 
+  import { countTotal } from '../controller/cart';
+
   export default {
     name: 'TheHeader',
     setup() {
       //need to make reactive
-      const totalQty = countTotal('inCart', 'qty')
-      const totalPrice = countTotal('inCart' , 'price')
-      return { totalQty, totalPrice }
+      let totalQty = countTotal('inCart', 'qty');
+      
+      return { totalQty }
     }
   }
 </script>
@@ -32,9 +34,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #eee;
-    min-height: 80px;
-    padding-inline: 1rem
+    background-color: var(--clr-primary);
+    min-height: 5rem;
+    padding-inline: 1rem;
   }
 
   nav {
@@ -43,8 +45,30 @@
     align-items: center;
   }
   
-  /* cart needs styling */
+  .link {
+    color: var(--clr-secondary);
+    text-decoration: none;
+  }
+
   .cart {
-    background-color: orange;
+    text-decoration: none;
+    color: var(--clr-secondary);
+    padding-left: .5rem;
+    cursor: pointer;
+  }
+  
+  .icon {
+    font-size: 26px;
+  }
+  
+  .qty {
+    position: absolute;
+    background-color: var(--clr-accent);
+    font-size: .9em;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 50%;
+    top: 9px; 
+    right: 35px;
   }
 </style>

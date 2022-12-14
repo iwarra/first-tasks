@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>This is the products page</h1>
+    <h1>Our coffee universe </h1>
     <div class="container">
-      <div class="card" v-for="product in products">
+      <div class="card" v-for="product in products" @click="openProductPage(product.SKU)">
         <ProductInfo :product="product"/>
       </div>
     </div>
@@ -12,13 +12,19 @@
 <script>
 import ProductInfo from '@/components/ProductInfo.vue';
 import products from '../data/products.json'
+import { useRouter } from 'vue-router';
+
 export default { 
   components: { ProductInfo },
   setup() {
-    return { products }
+    const router = useRouter();
+    function openProductPage(productSKU) {
+      router.push({ name: 'product', params: { sku: productSKU } })
+    }
+
+    return { products, openProductPage }
   }
 }
-
 </script>
 
 <style scoped> 
@@ -27,6 +33,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 16px;
+  justify-content: center;
 }
 
 .card {
@@ -37,9 +44,6 @@ export default {
     padding: 1em;
     gap: 1em;
     border-radius: .5rem;
-  }
-
-  h1 {
-    margin-block: 1rem;
+    cursor: pointer;
   }
 </style>

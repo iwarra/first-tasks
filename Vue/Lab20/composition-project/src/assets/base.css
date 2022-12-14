@@ -7,3 +7,9 @@
 body {
   height: 100%; 
 }
+
+:root {
+  --clr-primary: #ebc999;
+  --clr-secondary: #4d3227; 
+  --clr-accent: #eb7805;
+}

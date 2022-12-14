@@ -16,7 +16,6 @@
       TheFooter
     }
   }
-
 </script>
 
 <style>
@@ -34,5 +33,10 @@
     flex: 1;
     max-width: 1200px;
     align-self: center;
+  }
+
+  h1 {
+    margin-block: 1.5rem;
+    color: #4d3227;
   }
 </style>
