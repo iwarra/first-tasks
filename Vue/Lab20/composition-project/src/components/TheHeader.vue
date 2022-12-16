@@ -32,8 +32,8 @@ import { inject } from 'vue'
     align-items: center;
     justify-content: space-between;
     background-color: var(--clr-primary);
-    min-height: 5rem;
-    padding-inline: 1rem;
+    min-height: 6rem;
+    padding-inline: 1.5rem;
   }
 
   nav {
@@ -55,7 +55,7 @@ import { inject } from 'vue'
   }
   
   .icon {
-    font-size: 26px;
+    font-size:1.7rem;
   }
   
   .qty {
@@ -65,7 +65,7 @@ import { inject } from 'vue'
     color: white;
     padding: 3px 8px;
     border-radius: 50%;
-    top: 9px; 
-    right: 35px;
+    top: 16px; 
+    right: 34px;
   }
 </style>

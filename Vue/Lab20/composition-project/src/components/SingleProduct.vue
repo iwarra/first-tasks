@@ -6,7 +6,8 @@
           <h1>{{ producer }}</h1>
           <em class="sku">{{sku}}</em>
           <h2>{{ productName }}</h2>
-          <span>Stock: {{ Stock }}</span>
+          <span v-if="Stock > 0" class="stock">In stock</span>
+          <span v-else class="stock">Out of stock</span>
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod tempora alias rerum ad laborum! Distinctio eveniet neque, doloribus dicta numquam dolor consequatur, vitae, iure repudiandae eos inventore ratione nulla repellendus.</p>
           <div class="call-to-action" >
             <span class="price">Price: {{ priceFormated }}</span>
@@ -72,19 +73,10 @@ export default {
     align-items: center;
   }
 
-  .cart-btn {
-    border: .3px solid rgb(184, 182, 182);
-    padding: .6rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: rgb(252, 251, 251);
-    font-size: 1rem;
-    margin-left: 1.5em;
-  }
-
   .price {
     color: var(--orange);
     font-weight: 600;
     font-size: 1.2rem;
+    margin-right: 1.6rem;
   }
 </style>

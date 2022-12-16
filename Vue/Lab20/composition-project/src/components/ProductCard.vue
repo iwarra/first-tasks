@@ -4,7 +4,7 @@
     <h2>{{ productName }}</h2>
     <em class="sku">SKU: {{ sku }}</em>
   </div>
-  <span v-if="Stock > 0 ">Stock: {{ Stock }}</span>
+  <span v-if="Stock > 0" class="stock">In stock</span>
   <span v-else class="stock">Out of stock</span>
   <div class="buy"> 
   <span class="price">{{ priceFormated }}</span>
@@ -50,38 +50,18 @@ import { inject } from 'vue';
   .buy {
     display:flex;
     flex-direction:column;
-    align-items: start;
+    align-items: flex-start;
     gap: .5em;
-  }
-
-  .cart-btn {
-    border: .3px solid rgb(184, 182, 182);
-    padding: .5rem .9rem;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: rgb(252, 251, 251);
-    font-size: 1rem;
-    transition: 2s;
   }
 
   .cart-btn:hover {
     background-color: rgb(215, 211, 211);
-    transition: 2s;
+    transition: 1s;
   }
 
   .price {
     font-weight: 600;
     font-size: 1.5rem;
     color: var(--clr-accent);
-  }
-
-  .sku {
-    color: gray;
-    font-size: .9rem;
-  }
-
-  .stock {
-    font-weight: 600;
-    color: gray;
   }
 </style>

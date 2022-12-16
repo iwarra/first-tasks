@@ -16,6 +16,11 @@ const routes = [
     component: ProductsView
   },
   {
+    path: '/products/:number',
+    name: 'paginatedProducts',
+    component: ProductsView
+  },
+  {
     path: '/checkout',
     name: 'checkout',
     component: CheckoutView

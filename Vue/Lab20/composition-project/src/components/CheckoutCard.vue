@@ -9,7 +9,7 @@
         <em class="sku">SKU: {{ sku }}</em>
       </div>
     </div>
-    <ChangeQuantity />
+    <ChangeQuantity :sku="sku"/>
     <div class="total">
       <span class="total-text">Your total is: </span>
       <span class="total-number">{{priceTotalFormated}} </span>
@@ -19,49 +19,44 @@
 
 <script>
 import { countTotal } from '../controller/cart';
-import { getAll, add, remove } from '../controller/storage'
+import { getAll, remove } from '../controller/storage'
 import { inject } from 'vue';
 import ChangeQuantity from '../components/ChangeQuantity.vue'
-import products from '../data/products.json'
 
   export default {
     components: { ChangeQuantity },
     setup() {
-      //get data from database
-      let allInfo = getAll('inCart')
-      console.log(allInfo)
 
       const { cartTotal: productTotal } = inject("cartTotal")
       const priceTotal = countTotal('inCart', 'price')
-
       const priceTotalFormated = new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(priceTotal)
 
-      return { priceTotal, productTotal, getAll, add, remove, priceTotalFormated}
+      return { priceTotal, productTotal, getAll, remove, priceTotalFormated}
     }
   }
 
 </script>
 
 <style scoped>
-.parent {
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
-}
+  .parent {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+  }
 
-.product-info {
-  display: flex;
-  flex-direction: column;
-}
+  .product-info {
+    display: flex;
+    flex-direction: column;
+  }
 
-img {
-  height: 200px;
-}
+  img {
+    height: 200px;
+  }
   .total {
     display: flex;
     font-weight: 600;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
   }
 
   .total-text{
