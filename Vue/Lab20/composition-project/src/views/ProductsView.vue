@@ -1,42 +1,41 @@
 <template>
   <div class="products-container">
     <h1>Our coffee universe </h1>
-     <div class="card-container">
-      <div class="card" v-for="product in paginated.at(pageNumber)" 
+    <div class="card-container" :key="pageNumber">
+    <div class="card" :key="product.SKU" v-for="product in paginated.at(pageNumber)" 
         @click="openProductPage($event, product.SKU)">
         <ProductCard :product="product"/>
       </div>
     </div>
-    <ThePagination :arr="item" @paginationClicked="(index) => { }"/>
+    <ThePagination @paginationClicked="updatePageNumber"/>
   </div>
 </template>
 
 <script>
 import ProductCard from '@/components/ProductCard.vue';
 import ThePagination from '@/components/ThePagination.vue';
-import { paginated } from '../controller/data'
+import { paginated } from '../controller/data';
 import { useRouter, useRoute } from 'vue-router';
-import { ref } from "vue"
+import { ref } from "vue";
 
 export default { 
   components: { ProductCard, ThePagination },
   setup() {
-    // for pagination
-    function paginationRoute(index, router) {
-      router.push({ name: 'paginatedProducts', params: { number: index + 1 } })
-    }
-    const route = useRoute()
-    let pageNumber = ref(route.params.number)
-  
-
-    // for opening single product page
+    // route to single-product page
     const router = useRouter();
     function openProductPage(event, productSKU) {
       if (event.target.localName === 'button') return
       router.push({ name: 'product', params: { sku: productSKU } })
     }
 
-    return { openProductPage, paginated, pageNumber, router, paginationRoute }
+    // to get current address-bar number
+    const route = useRoute()
+    let pageNumber = ref(route.params.number)
+    function updatePageNumber(newNumber) {
+      pageNumber.value = newNumber
+    }
+
+    return { openProductPage, paginated, pageNumber, updatePageNumber }
   }
 }
 </script>

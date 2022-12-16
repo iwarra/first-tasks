@@ -5,7 +5,7 @@
     </a>
     <nav>
       <router-link to="/" class="link">Home</router-link>
-      <router-link to="/products" class="link">Products</router-link>
+      <router-link to="/products" class="link" >Products</router-link>
       <router-link to="/checkout" class="cart">
         <span class="qty">{{ cartTotal }}</span>
         <span class="icon">&#128722;</span>
@@ -21,6 +21,7 @@ import { inject } from 'vue'
     name: 'TheHeader',
     setup() {
       const { cartTotal } = inject("cartTotal")
+
       return { cartTotal }
     }
   }
