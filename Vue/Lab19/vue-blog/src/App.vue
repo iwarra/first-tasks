@@ -4,7 +4,7 @@
       <RouterView :sendID="articleID" 
                   @button-clicked="(id) => { 
                   articleID = id;
-                  this.$router.push('/view-post/:id')
+                  this.$router.push({name: 'read', params: {'id' : articleID}})
                   }" />
     </div>
     <TheFooter />
