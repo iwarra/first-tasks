@@ -5,7 +5,7 @@
     </a>
     <nav>
       <router-link to="/" class="link">Home</router-link>
-      <router-link to="/products" class="link" >Products</router-link>
+      <router-link to="/products" class="link" @click="triggerUpdate(Math.random())">Products</router-link>
       <router-link to="/checkout" class="cart">
         <span class="qty">{{ cartTotal }}</span>
         <span class="icon">&#128722;</span>
@@ -15,14 +15,15 @@
 </template>
 
 <script>
-import { inject } from 'vue' 
+import { inject } from 'vue'; 
 
   export default {
     name: 'TheHeader',
     setup() {
       const { cartTotal } = inject("cartTotal")
+      const { triggerUpdate } = inject('trigger')
 
-      return { cartTotal }
+      return { cartTotal, triggerUpdate }
     }
   }
 </script>

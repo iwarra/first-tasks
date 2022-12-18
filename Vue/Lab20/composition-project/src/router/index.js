@@ -19,6 +19,7 @@ const routes = [
     path: '/products/:number',
     name: 'paginatedProducts',
     component: ProductsView
+    
   },
   {
     path: '/checkout',

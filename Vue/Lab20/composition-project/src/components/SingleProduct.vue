@@ -6,8 +6,8 @@
           <h1>{{ producer }}</h1>
           <em class="sku">{{sku}}</em>
           <h2>{{ productName }}</h2>
-          <span v-if="Stock > 0" class="stock">In stock</span>
-          <span v-else class="stock">Out of stock</span>
+          <span v-if="Stock > 0" class="stock in-stock">{{Stock}} in stock</span>
+          <span v-else class="stock out-of-stock">Out of stock</span>
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod tempora alias rerum ad laborum! Distinctio eveniet neque, doloribus dicta numquam dolor consequatur, vitae, iure repudiandae eos inventore ratione nulla repellendus.</p>
           <div class="call-to-action" >
             <span class="price">Price: {{ priceFormated }}</span>
@@ -78,5 +78,14 @@ export default {
     font-weight: 600;
     font-size: 1.2rem;
     margin-right: 1.6rem;
+  }
+
+  .in-stock {
+    color: darkgreen;
+  }
+
+  .in-stock::before {
+    content: "\2713";
+    padding-right: 0.2rem;
   }
 </style>

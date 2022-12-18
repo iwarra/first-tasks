@@ -4,11 +4,12 @@
     <h2>{{ productName }}</h2>
     <em class="sku">SKU: {{ sku }}</em>
   </div>
-  <span v-if="Stock > 0" class="stock">In stock</span>
-  <span v-else class="stock">Out of stock</span>
   <div class="buy"> 
-  <span class="price">{{ priceFormated }}</span>
-  <button v-if="Stock > 0" @click="addToCartClicked()" class="cart-btn">Add to cart &#128722;</button>
+    <span class="price">{{ priceFormated }}</span>
+    <button v-if="Stock > 0" @click="addToCartClicked()" class="cart-btn">Add to cart &#128722;</button>
+    <div v-else class="stock">
+      <span>Out of stock</span>
+    </div>
   </div>
 </template>
 
@@ -48,6 +49,7 @@ import { inject } from 'vue';
   }
 
   .buy {
+    height: 100%;
     display:flex;
     flex-direction:column;
     align-items: flex-start;
@@ -63,5 +65,11 @@ import { inject } from 'vue';
     font-weight: 600;
     font-size: 1.5rem;
     color: var(--clr-accent);
+  }
+
+  .stock {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
   }
 </style>
