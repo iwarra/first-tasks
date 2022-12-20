@@ -1,69 +1,62 @@
 <template>
-  <div>
-    <h1 v-if="productTotal == 1" >There is {{ productTotal }} product in your cart</h1>
-    <h1 v-else>There are {{ productTotal }} products in your cart</h1>
-    <div class="parent"> <!-- loop thru all products in the cart? -->
-      <img src="../../public/coffee-machine.png" alt="coffee machine">
+    <img src="../../public/coffee-machine.png" alt="coffee machine">
       <div class="product-info">
-        <h2>Product Name</h2>
-        <em class="sku">SKU: {{ sku }}</em>
+        <div class="row">
+          <h2>{{product.name}}</h2>
+          <button class="close-btn" @click="remove('inCart', 'sku', product.sku)">x</button>
+        </div>
+        <em class="sku">SKU: {{ product.sku }}</em>
+        <span class="price">
+          {{new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(product.pricePerPiece)}}
+        </span>
+        <ChangeQuantity :sku="product.sku" :price="product.pricePerPiece" :total="product.qty" :product="product"/>
+        <span class="price">{{new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(product.price)}}</span>
       </div>
-    </div>
-    <ChangeQuantity :sku="sku"/>
-    <div class="total">
-      <span class="total-text">Your total is: </span>
-      <span class="total-number">{{priceTotalFormated}} </span>
-    </div>
-  </div>
 </template>
 
 <script>
-import { countTotal } from '../controller/cart';
-import { getAll, remove } from '../controller/storage'
-import { inject } from 'vue';
 import ChangeQuantity from '../components/ChangeQuantity.vue'
+import { remove } from '../controller/storage';
 
   export default {
     components: { ChangeQuantity },
-    setup() {
-
-      const { cartTotal: productTotal } = inject("cartTotal")
-      const priceTotal = countTotal('inCart', 'price')
-      const priceTotalFormated = new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(priceTotal)
-
-      return { priceTotal, productTotal, getAll, remove, priceTotalFormated}
+    props: ['product'],
+    setup(props) {
+      
+      return { remove }
     }
   }
-
 </script>
 
 <style scoped>
-  .parent {
+  .row {
     display: flex;
     flex-direction: row;
-    gap: 1em;
+    justify-content: space-between;
+    gap: 2rem;
   }
 
+  .close-btn {
+    justify-self: flex-end;
+    background-color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+  }
   .product-info {
     display: flex;
     flex-direction: column;
+    gap: .3rem;
   }
 
   img {
     height: 200px;
   }
-  .total {
-    display: flex;
-    font-weight: 600;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
 
-  .total-text{
-    font-size: 1.5rem;
-  }
-
-  .total-number{
-    font-size: 2rem;
+  h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>
