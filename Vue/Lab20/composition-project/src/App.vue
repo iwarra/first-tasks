@@ -70,7 +70,7 @@
   }
 
   h1 {
-    margin-block: 1.5rem;
+    margin-block: 2rem;
     color: #4d3227;
   }
 </style>

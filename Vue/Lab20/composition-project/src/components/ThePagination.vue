@@ -1,13 +1,16 @@
 <template>
   <div class="pagination">
-    <button class="page-btn" :disabled="pageNumber <= 0"
-      @click="routeTo(Number(pageNumber) -1)">Previous</button>
+    <button :disabled="pageNumber <= 0" @click="routeTo(Number(pageNumber) -1)" 
+      :class="['first page-btn', pageNumber <= 0 ? 'disabled' : '']">Previous</button>
+    <button :class="['page-btn', pageNumber == 0 ? 'active' : '']" 
+      @click="routeTo(0)">1</button>
     <template v-for="(_, index) in paginated">
-      <button :key="index" v-if="index < paginationLength" 
-        :class="['page-btn', pageNumber == index + 1 ? 'active' : '']" 
-        @click="routeTo(index +1)">{{index + 1}}</button>
+      <button :key="index" v-if="index > 0" 
+        :class="['page-btn', pageNumber == index ? 'active' : '']" 
+        @click="routeTo(index)">{{index + 1}}</button>
     </template>
-    <button class="page-btn" :disabled="pageNumber >= paginationLength"
+    <button :disabled="pageNumber >= paginationLength"
+      :class="['last page-btn', pageNumber >= paginationLength ? 'disabled' : '']"
       @click="routeTo(Number(pageNumber) +1)">Next</button>
   </div>
 </template>
@@ -23,10 +26,11 @@ export default {
     let paginationLength = paginated.length - 1;
     const router = useRouter()
 
+    // Param must be index + 1 to follow the number on the buttons
     function paginationRoute(index) {
       index == 0 ? 
       router.push({ name: 'products'}) 
-      : router.push({ name: 'paginatedProducts', params: { number: index } })
+      : router.push({ name: 'paginatedProducts', params: { number: index + 1} })
     }
 
     function routeTo(index) {
@@ -37,26 +41,39 @@ export default {
     return { paginated, routeTo, paginationLength }
   }
 }
-
 </script>
 
 <style scoped>
   .pagination {
     display: flex;
-    gap: .4em;
-    margin-block: 2rem;
+    margin-block: 3rem;
     align-self: center;
   }
   .page-btn {
-    padding: .5em;
+    padding: .5em .8em;
+    background-color: rgb(255, 254, 254);
+    border: none;
+    font-size: 1em;
     background-color: #eee;
-    border: 1px solid darkgray;
-    border-radius: 5px;
+    color: var(--clr-secondary);
     cursor: pointer;
   }
+
+  .first {
+    border-radius: 15px 0 0 15px;
+    padding-left: 1em;
+  }
+
+  .last {
+    border-radius: 0 15px 15px 0;
+    padding-right: 1em;
+  }
   .active {
-    background-color: var(--clr-primary);
+    background-color: var(--clr-accent);
     cursor: auto;
   }
 
+  .disabled {
+   color: #5a4137a7;
+  }
 </style>

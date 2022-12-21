@@ -32,7 +32,8 @@ export default {
 
     // to get current address-bar number
     const route = useRoute()
-    let pageNumber = ref(route.params.number ?? 0)
+    //Param must be - 1 as we increased it earlier to match with pagination numbers
+    let pageNumber = ref((route.params.number - 1) || 0) ;
 
     //Trigger the page to refresh by updating the key
     function updatePageNumber(newNumber) {

@@ -16,6 +16,7 @@ function findSingleProduct(sku) {
   return products.find(product => product.SKU == sku)
 }
 
+
 export {
   paginated,
   divideIntoSmallerArr,
