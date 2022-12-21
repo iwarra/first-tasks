@@ -44,9 +44,14 @@ function countTotal(storageItem, key) {
       return previous + current[key] }, 0)
 }
 
+function getTotalPricePerProduct(sku) {
+  const item = getItem('inCart', 'sku', sku)
+  return item.price
+}
 
 export { 
   addToCart,
   countTotal,
-  updateCart
+  updateCart,
+  getTotalPricePerProduct
 } 

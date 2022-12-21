@@ -40,7 +40,7 @@
 
       provide('price', {
         priceTotal,
-        setPriceTotal
+        setPriceTotal,
       })
 
       provide('trigger', {

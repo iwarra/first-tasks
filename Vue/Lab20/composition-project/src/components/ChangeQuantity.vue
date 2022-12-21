@@ -14,7 +14,7 @@
 
 <script>
 import { inject, ref } from 'vue';
-import { addToCart, countTotal, updateCart } from '@/controller/cart';
+import { addToCart, countTotal, updateCart, getTotalPricePerProduct } from '@/controller/cart';
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/plus-circle'
 import 'vue-awesome/icons/minus-circle'
@@ -24,7 +24,7 @@ export default {
     "v-icon": Icon
   },
   props: ['product'],
-  setup (props) {
+  setup (props, {emit}) {
     const { setCartTotal } = inject("cartTotal")  
     const { setPriceTotal } = inject('price')
     let inputQty = ref(0)
@@ -35,6 +35,7 @@ export default {
       setCartTotal(countTotal('inCart', 'qty'))
       inputQty.value++
       setPriceTotal(countTotal('inCart', 'price'))
+      emit('countingTotal', getTotalPricePerProduct(props.product.sku))
     }
 
     function updateCartClicked() {
@@ -42,6 +43,7 @@ export default {
       setCartTotal(countTotal('inCart', 'qty'))
       inputQty.value--
       setPriceTotal(countTotal('inCart', 'price'))
+      emit('countingTotal', getTotalPricePerProduct(props.product.sku))
     }
 
     return { addToCartClicked, setCartTotal, inputQty, updateCartClicked }
@@ -98,6 +100,7 @@ export default {
   .quantity-bar > * {
     font-weight: 900;
   }
+  
   .quantity-bar {
     display: flex;
     gap: .5rem;

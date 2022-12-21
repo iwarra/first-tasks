@@ -6,9 +6,7 @@ function getAll(storageItem) {
 
 function getItem(storageItem, key, value) {
   const result =  getAll(storageItem).filter(item => item[key] === value)
-
   if (result.length > 1) throw Error("There is more than one unique result found")
-
   return result.at(0)
 }
 

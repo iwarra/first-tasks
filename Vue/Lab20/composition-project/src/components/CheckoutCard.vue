@@ -9,21 +9,26 @@
         <span class="price">
           {{new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(product.pricePerPiece)}}
         </span>
-        <ChangeQuantity :sku="product.sku" :price="product.pricePerPiece" :total="product.qty" :product="product"/>
-        <span class="price">{{new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(product.price)}}</span>
+        <ChangeQuantity :product="product" @countingTotal="updateTotalPerProduct"/>
+        <span class="price">Total: {{ new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(currentTotal) }}</span>
       </div>
 </template>
 
 <script>
 import ChangeQuantity from '../components/ChangeQuantity.vue'
 import { remove } from '../controller/storage';
+import { ref } from 'vue';
 
   export default {
     components: { ChangeQuantity },
     props: ['product'],
     setup(props) {
-      
-      return { remove }
+      let currentTotal = ref(props.product.price)
+      function updateTotalPerProduct(update) {
+        currentTotal.value = update
+      }
+
+      return { remove, updateTotalPerProduct, currentTotal }
     }
   }
 </script>
@@ -47,7 +52,7 @@ import { remove } from '../controller/storage';
   .product-info {
     display: flex;
     flex-direction: column;
-    gap: .3rem;
+    gap: .5rem;
   }
 
   img {
@@ -58,5 +63,6 @@ import { remove } from '../controller/storage';
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--clr-secondary);
   }
 </style>
