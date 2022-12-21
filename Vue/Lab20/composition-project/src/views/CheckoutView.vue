@@ -1,4 +1,5 @@
 <template>
+  <TheModal :product="product" v-show="isVisible"/>
   <div class="checkout-container">
     <h1 v-if="productTotal == 1" >There is {{ productTotal }} product in your cart</h1>
     <h1 v-else>There are {{ productTotal }} products in your cart</h1>
@@ -14,11 +15,12 @@
 
 <script>
 import CheckoutCard from '../components/CheckoutCard.vue';
+import TheModal from '@/components/TheModal.vue';
 import { inject } from 'vue';
 import { checkoutItems } from '../controller/checkout'
 
   export default {
-    components:  { CheckoutCard } ,
+    components:  { CheckoutCard, TheModal } ,
     setup() {
       const { priceTotal } = inject('price')
       const { cartTotal: productTotal } = inject("cartTotal")

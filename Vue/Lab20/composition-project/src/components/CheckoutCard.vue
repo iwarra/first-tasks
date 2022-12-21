@@ -10,7 +10,7 @@
           {{new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(product.pricePerPiece)}}
         </span>
         <ChangeQuantity :product="product" @countingTotal="updateTotalPerProduct"/>
-        <span class="price">Total: {{ new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(currentTotal) }}</span>
+        <span class="price total">Total: {{ new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(currentTotal) }}</span>
       </div>
 </template>
 
@@ -46,13 +46,21 @@ import { ref } from 'vue';
     background-color: white;
     border: none;
     font-weight: 600;
-    font-size: 1em;
+    font-size: 1.2em;
     cursor: pointer;
+    color: rgb(167, 164, 164);
+    transition: 1s;
+  }
+
+  .close-btn:hover {
+    color: black;
+    transition: 1s;
   }
   .product-info {
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    width: 100%;
   }
 
   img {
@@ -64,5 +72,9 @@ import { ref } from 'vue';
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--clr-secondary);
+  }
+
+  .total {
+    font-weight: 500;
   }
 </style>

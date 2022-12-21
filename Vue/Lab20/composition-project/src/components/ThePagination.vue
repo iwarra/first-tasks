@@ -26,11 +26,10 @@ export default {
     let paginationLength = paginated.length - 1;
     const router = useRouter()
 
-    // Param must be index + 1 to follow the number on the buttons
     function paginationRoute(index) {
       index == 0 ? 
       router.push({ name: 'products'}) 
-      : router.push({ name: 'paginatedProducts', params: { number: index + 1} })
+      : router.push({ name: 'paginatedProducts', params: { number: index } })
     }
 
     function routeTo(index) {

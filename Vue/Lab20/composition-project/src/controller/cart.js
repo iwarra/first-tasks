@@ -8,30 +8,26 @@ function createProductObj(sku, qty, price) {
   }
 }
 
-function addToCart(sku, price, qty = 1) {
+function updateCart(sku, price, mathOperation, qty = 1) {
   if (inArchive('inCart', 'sku', sku)) {
     const item = getItem('inCart', 'sku', sku)
-    qty += item.qty
-    price += item.price
+    
+    if ( mathOperation === 'addition') {
+      if (qty > 1) price = item.price + (price * qty)
+
+      else price += item.price;
+      qty += item.qty
+    }
+    else if ( mathOperation === 'subtraction') { 
+      if (qty > 1 ) price = item.price - (price * qty)
+      
+      else price = item.price - price
+      qty = item.qty - qty
+    }
     // Created a new product from the existing one in archive. Uppdated price and quantity and removing the old one before the new one is added to the storage
     remove('inCart', 'sku', sku)
   }
   add('inCart', createProductObj(sku, qty, price))
-}
-
-function updateCart(sku, price, qty = 1) {
-  let newQuantity
-  let newPrice
-  if (inArchive('inCart', 'sku', sku)) {
-    const item = getItem('inCart', 'sku', sku)
-    newQuantity = item.qty - qty
-    item.qty = newQuantity
-    newPrice = item.price - price
-    item.price = newPrice
-    // Created a new product from the existing one in archive. Uppdated price and quantity and removing the old one before the new one is added to the storage
-    remove('inCart', 'sku', sku)
-  }
-  add('inCart', createProductObj(sku, newQuantity, newPrice))
 }
 
 function countTotal(storageItem, key) {
@@ -50,7 +46,6 @@ function getTotalPricePerProduct(sku) {
 }
 
 export { 
-  addToCart,
   countTotal,
   updateCart,
   getTotalPricePerProduct

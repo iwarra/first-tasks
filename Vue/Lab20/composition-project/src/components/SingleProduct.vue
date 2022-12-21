@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { addToCart, countTotal } from '../controller/cart.js';
+import { updateCart, countTotal } from '../controller/cart.js';
 import { inject } from 'vue';
 
 export default {
@@ -32,7 +32,7 @@ export default {
     
     const { setCartTotal } = inject("cartTotal")
     function addToCartClicked() {
-      addToCart(sku, price)
+      updateCart(sku, price, 'addition')
       setCartTotal(countTotal('inCart', 'qty'))
     }
 

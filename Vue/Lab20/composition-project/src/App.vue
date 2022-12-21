@@ -15,7 +15,7 @@
   export default {
     components: {
       TheHeader,
-      TheFooter
+      TheFooter,
     },
     setup() {
       const cartTotal = ref(countTotal('inCart', 'qty'))

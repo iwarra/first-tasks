@@ -2,51 +2,65 @@
   <div class="quantity-bar">
     <div class="quantity-selector">
       <v-icon class="icon" name="minus-circle" 
-        @click="updateCartClicked()"/>
+        @click="addToCartClicked('minus')"/>
     </div>
-    <input type="number" autocomplete="off" v-model="inputQty">
+    <input type="number" autocomplete="off" v-model="inputQty" @change="inputCheck(product.qty)">
     <div class="quantity-selector">
       <v-icon class="icon" name="plus-circle" 
-        @click="addToCartClicked()"/>
+        @click="addToCartClicked('plus')"/>
     </div>
   </div>
 </template>
 
 <script>
 import { inject, ref } from 'vue';
-import { addToCart, countTotal, updateCart, getTotalPricePerProduct } from '@/controller/cart';
+import { countTotal, updateCart, getTotalPricePerProduct } from '@/controller/cart';
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/plus-circle'
 import 'vue-awesome/icons/minus-circle'
 
 export default {
   components: {
-    "v-icon": Icon
+    "v-icon": Icon, 
   },
   props: ['product'],
   setup (props, {emit}) {
     const { setCartTotal } = inject("cartTotal")  
     const { setPriceTotal } = inject('price')
-    let inputQty = ref(0)
-    inputQty.value = inputQty.value + props.product.qty
+    let inputQty = ref(props.product.qty)
 
-    function addToCartClicked() {
-      addToCart(props.product.sku, props.product.pricePerPiece)
-      setCartTotal(countTotal('inCart', 'qty'))
-      inputQty.value++
-      setPriceTotal(countTotal('inCart', 'price'))
-      emit('countingTotal', getTotalPricePerProduct(props.product.sku))
+    function inputCheck(previous) {
+      if (inputQty.value !== previous  && inputQty.value < previous) {
+        let quantity = previous - inputQty.value
+        updateCart(props.product.sku, props.product.pricePerPiece, 'subtraction', quantity)
+        setCartTotal(countTotal('inCart', 'qty'))
+        setPriceTotal(countTotal('inCart', 'price'))
+        emit('countingTotal', getTotalPricePerProduct(props.product.sku)) 
+      }
+      if (inputQty.value !== previous  && inputQty.value > previous) {
+        let quantity = inputQty.value - previous
+        updateCart(props.product.sku, props.product.pricePerPiece, 'addition', quantity)
+        setCartTotal(countTotal('inCart', 'qty'))
+        setPriceTotal(countTotal('inCart', 'price'))
+        emit('countingTotal', getTotalPricePerProduct(props.product.sku)) 
+      }
     }
 
-    function updateCartClicked() {
-      updateCart(props.product.sku, props.product.pricePerPiece)
-      setCartTotal(countTotal('inCart', 'qty'))
-      inputQty.value--
+    function addToCartClicked(param) {
+      if (param === 'plus') {
+        updateCart(props.product.sku, props.product.pricePerPiece, 'addition')
+        inputQty.value++
+      }
+      if (param === 'minus') {
+        updateCart(props.product.sku, props.product.pricePerPiece, 'subtraction')
+        inputQty.value--
+      }
       setPriceTotal(countTotal('inCart', 'price'))
-      emit('countingTotal', getTotalPricePerProduct(props.product.sku))
+      setCartTotal(countTotal('inCart', 'qty'))
+      emit('countingTotal', getTotalPricePerProduct(props.product.sku)) 
     }
 
-    return { addToCartClicked, setCartTotal, inputQty, updateCartClicked }
+    return { addToCartClicked, setCartTotal, inputQty, inputCheck }
   }
 }
 </script>
@@ -100,7 +114,7 @@ export default {
   .quantity-bar > * {
     font-weight: 900;
   }
-  
+
   .quantity-bar {
     display: flex;
     gap: .5rem;
