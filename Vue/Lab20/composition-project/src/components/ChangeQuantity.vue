@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { inject, ref } from 'vue';
+import { inject, ref, watch } from 'vue';
 import { countTotal, updateCart, getTotalPricePerProduct } from '@/controller/cart';
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/plus-circle'
@@ -27,7 +27,12 @@ export default {
   setup (props, {emit}) {
     const { setCartTotal } = inject("cartTotal")  
     const { setPriceTotal } = inject('price')
+    const { toggle } = inject('modalVisibility')
     let inputQty = ref(props.product.qty)
+
+    watch(inputQty, () => {
+      if (inputQty.value === 0) toggle()
+    })
 
     function inputCheck(previous) {
       if (inputQty.value !== previous  && inputQty.value < previous) {

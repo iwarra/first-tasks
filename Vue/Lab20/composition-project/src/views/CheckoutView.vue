@@ -1,9 +1,9 @@
 <template>
-  <TheModal :product="product" v-show="isVisible"/>
   <div class="checkout-container">
     <h1 v-if="productTotal == 1" >There is {{ productTotal }} product in your cart</h1>
     <h1 v-else>There are {{ productTotal }} products in your cart</h1>
     <div class="card" v-for="product in checkoutItems" :key="product.sku"> 
+      <TheModal :product="product"/>
       <CheckoutCard :product="product"/>
     </div>
     <div class="total">
@@ -16,7 +16,7 @@
 <script>
 import CheckoutCard from '../components/CheckoutCard.vue';
 import TheModal from '@/components/TheModal.vue';
-import { inject } from 'vue';
+import { inject, provide, ref } from 'vue';  
 import { checkoutItems } from '../controller/checkout'
 
   export default {
@@ -24,6 +24,16 @@ import { checkoutItems } from '../controller/checkout'
     setup() {
       const { priceTotal } = inject('price')
       const { cartTotal: productTotal } = inject("cartTotal")
+
+      let isVisible = ref(false)
+      function toggle() {
+        isVisible.value = !isVisible.value
+      }
+
+      provide('modalVisibility', {
+        isVisible,
+        toggle,
+      })
 
       return { productTotal, checkoutItems, priceTotal }
     }

@@ -68,6 +68,7 @@ import { ref } from 'vue';
   }
 
   h2 {
+    
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
