@@ -21,7 +21,7 @@ import { inject } from 'vue';
     name: 'ProductInfo',
     props: [ 'product' ],
     setup(props) {
-      const { Producer: producer, SKU: sku, EUR: price, Stock } = props.product
+      const { SKU: sku, EUR: price, Stock } = props.product
       const productName = props.product['Name of product']
       const priceFormated = new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(price)
 
@@ -31,7 +31,7 @@ import { inject } from 'vue';
         setCartTotal(countTotal('inCart', 'qty'))
       }
   
-      return { producer, sku, price, productName, Stock, addToCartClicked, priceFormated}
+      return {sku, price, productName, Stock, addToCartClicked, priceFormated}
     }
   }
 </script>

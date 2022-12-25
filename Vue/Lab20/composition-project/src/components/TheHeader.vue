@@ -1,8 +1,6 @@
 <template>
   <header>
-    <a href="/"> 
-      <img src="../../public/logo.png" alt="Logo">
-    </a>
+    <a href="/"> <img src="../../public/logo.png" alt="Logo"> </a>
     <nav>
       <router-link to="/" class="link">Home</router-link>
       <router-link to="/products" class="link" @click="triggerUpdate(Math.random())">Products</router-link>

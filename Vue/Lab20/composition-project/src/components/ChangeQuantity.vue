@@ -4,7 +4,7 @@
       <v-icon class="icon" name="minus-circle" 
         @click="addToCartClicked('minus')"/>
     </div>
-    <input type="number" autocomplete="off" v-model="inputQty" @change="inputCheck(product.qty)">
+    <input type="number" autocomplete="off" v-model="inputQty" @change="inputCheck(previous)">
     <div class="quantity-selector">
       <v-icon class="icon" name="plus-circle" 
         @click="addToCartClicked('plus')"/>
@@ -29,26 +29,33 @@ export default {
     const { setPriceTotal } = inject('price')
     const { toggle } = inject('modalVisibility')
     let inputQty = ref(props.product.qty)
-
+    console.log(inputQty)
+    
     watch(inputQty, () => {
       if (inputQty.value === 0) toggle()
     })
 
+    function setTotals() {
+      setCartTotal(countTotal('inCart', 'qty'))
+      setPriceTotal(countTotal('inCart', 'price'))
+    }
+
     function inputCheck(previous) {
+      if (inputQty.value == 0) return /*as modal does the rest */
+      console.log(previous, inputQty.value)
+
       if (inputQty.value !== previous  && inputQty.value < previous) {
         let quantity = previous - inputQty.value
         updateCart(props.product.sku, props.product.pricePerPiece, 'subtraction', quantity)
-        setCartTotal(countTotal('inCart', 'qty'))
-        setPriceTotal(countTotal('inCart', 'price'))
+        setTotals()
         emit('countingTotal', getTotalPricePerProduct(props.product.sku)) 
       }
       if (inputQty.value !== previous  && inputQty.value > previous) {
         let quantity = inputQty.value - previous
         updateCart(props.product.sku, props.product.pricePerPiece, 'addition', quantity)
-        setCartTotal(countTotal('inCart', 'qty'))
-        setPriceTotal(countTotal('inCart', 'price'))
+        setTotals()
         emit('countingTotal', getTotalPricePerProduct(props.product.sku)) 
-      }
+      } 
     }
 
     function addToCartClicked(param) {

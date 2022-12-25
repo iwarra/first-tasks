@@ -1,6 +1,6 @@
 <template>
   <div class="pagination">
-    <button :disabled="pageNumber <= 0" @click="routeTo(Number(pageNumber) -1)" 
+    <button :disabled="pageNumber <= 0" @click="routeTo(Number(pageNumber) - 1)" 
       :class="['first page-btn', pageNumber <= 0 ? 'disabled' : '']">Previous</button>
     <button :class="['page-btn', pageNumber == 0 ? 'active' : '']" 
       @click="routeTo(0)">1</button>
@@ -11,7 +11,7 @@
     </template>
     <button :disabled="pageNumber >= paginationLength"
       :class="['last page-btn', pageNumber >= paginationLength ? 'disabled' : '']"
-      @click="routeTo(Number(pageNumber) +1)">Next</button>
+      @click="routeTo(Number(pageNumber) + 1)">Next</button>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ import { useRouter } from 'vue-router';
 export default {
   emits: ['paginationClicked'],
   props: ['pageNumber'],
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     let paginationLength = paginated.length - 1;
     const router = useRouter()
 

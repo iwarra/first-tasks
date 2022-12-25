@@ -4,9 +4,9 @@
         <img src="../../public/coffee-machine.png" alt="Coffee machine">
         <div class="info">
           <h1>{{ producer }}</h1>
-          <em class="sku">{{sku}}</em>
+          <em class="sku">{{ sku }}</em>
           <h2>{{ productName }}</h2>
-          <span v-if="Stock > 0" class="stock in-stock">{{Stock}} in stock</span>
+          <span v-if="Stock > 0" class="stock in-stock">{{ Stock }} in stock</span>
           <span v-else class="stock out-of-stock">Out of stock</span>
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod tempora alias rerum ad laborum! Distinctio eveniet neque, doloribus dicta numquam dolor consequatur, vitae, iure repudiandae eos inventore ratione nulla repellendus.</p>
           <div class="call-to-action" >
@@ -26,7 +26,7 @@ export default {
   props: [ 'product' ],
   setup(props) {
     let { Producer: producer, SKU: sku, EUR: price, Stock } = props.product
-    producer = producer.toUpperCase()
+    producer = producer.at(0).toUpperCase().concat(producer.slice(1))
     const productName = props.product['Name of product']
     const priceFormated = new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(price)
     
@@ -81,7 +81,7 @@ export default {
   }
 
   .in-stock {
-    color: darkgreen;
+    color: rgb(2, 81, 2);
   }
 
   .in-stock::before {
