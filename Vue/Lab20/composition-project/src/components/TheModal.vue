@@ -4,7 +4,7 @@
       <span>Are you sure you want to delete this product?</span>
       <div class="answers">
         <span @click="clickedYes(product)" class="yes-btn">Yes</span> 
-        <span @click="clickedNo()" class="no-btn">No</span>
+        <span @click="clickedNo(product)" class="no-btn">No</span>
       </div>
     </div>
   </div>
@@ -23,10 +23,10 @@ import { inject } from 'vue';
         toggle()
       }
 
-      function clickedNo() {
-        //return product to as it was before 
+      function clickedNo(product) {
         toggle()
       }
+
       return { remove, isVisible, toggle, clickedYes, clickedNo }
     }
   }
@@ -42,7 +42,7 @@ import { inject } from 'vue';
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000000c1;
+  background-color: #2322228a;
 }
 .modal {
   background-color: rgb(243, 241, 241);

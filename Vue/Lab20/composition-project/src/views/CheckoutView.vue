@@ -25,6 +25,7 @@ import { checkoutItems } from '../controller/checkout'
       const { priceTotal } = inject('price')
       const { cartTotal: productTotal } = inject("cartTotal")
 
+      console.log(checkoutItems)
       let isVisible = ref(false)
       function toggle() {
         isVisible.value = !isVisible.value

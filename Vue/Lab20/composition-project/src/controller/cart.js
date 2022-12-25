@@ -48,5 +48,5 @@ function getTotalPricePerProduct(sku) {
 export { 
   countTotal,
   updateCart,
-  getTotalPricePerProduct
+  getTotalPricePerProduct,
 } 

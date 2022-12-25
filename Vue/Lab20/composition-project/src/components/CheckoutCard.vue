@@ -3,7 +3,7 @@
       <div class="product-info">
         <div class="row">
           <h2>{{product.name}}</h2>
-          <button class="close-btn" @click="remove('inCart', 'sku', product.sku)">x</button>
+          <button class="close-btn" @click="clickedRemove">x</button>
         </div>
         <em class="sku">SKU: {{ product.sku }}</em>
         <span class="price">
@@ -18,17 +18,24 @@
 import ChangeQuantity from '../components/ChangeQuantity.vue'
 import { remove } from '../controller/storage';
 import { ref } from 'vue';
+import router from '@/router';
 
   export default {
     components: { ChangeQuantity },
     props: ['product'],
     setup(props) {
       let currentTotal = ref(props.product.price)
+
       function updateTotalPerProduct(update) {
         currentTotal.value = update
       }
 
-      return { remove, updateTotalPerProduct, currentTotal }
+      function clickedRemove() {
+        remove('inCart', 'sku', props.product.sku)
+        router.go()
+      }
+
+      return { clickedRemove, updateTotalPerProduct, currentTotal }
     }
   }
 </script>
@@ -68,7 +75,6 @@ import { ref } from 'vue';
   }
 
   h2 {
-    
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
