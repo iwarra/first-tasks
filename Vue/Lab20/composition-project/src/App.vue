@@ -23,11 +23,6 @@
         cartTotal.value = newCartQty
       }
 
-      const priceTotal = ref(countTotal('inCart', 'price'))
-      function setPriceTotal(newTotal) {
-        priceTotal.value = newTotal
-      }
-
       let trigger = ref(Math.random())
       function triggerUpdate(randomNr) {
         trigger.value = randomNr
@@ -37,12 +32,6 @@
         cartTotal,
         setCartTotal,
       })
-
-      provide('price', {
-        priceTotal,
-        setPriceTotal,
-      })
-
       provide('trigger', {
         triggerUpdate,
         trigger

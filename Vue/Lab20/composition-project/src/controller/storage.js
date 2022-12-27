@@ -27,7 +27,7 @@ function inArchive(storageItem, key, value) {
 }
 
 //currently not in use
-function update(obj, key, mathOperation, value = 1) {
+function update(obj, key, value) {
   const previousValue = obj[key]
 
   if ( mathOperation === 'addition')
@@ -40,7 +40,7 @@ function update(obj, key, mathOperation, value = 1) {
   return { 
     ...obj,
     [key]: previousValue - value,
-  }
+  } 
 }
 
 export {

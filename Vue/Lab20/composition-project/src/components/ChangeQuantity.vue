@@ -26,7 +26,6 @@ export default {
   props: ['product'],
   setup (props, {emit}) {
     const { setCartTotal } = inject("cartTotal")  
-    const { setPriceTotal } = inject('price')
     const { toggle } = inject('modalVisibility')
     let inputQty = ref(props.product.qty)
 
@@ -36,7 +35,7 @@ export default {
 
     function setTotals() {
       setCartTotal(countTotal('inCart', 'qty'))
-      setPriceTotal(countTotal('inCart', 'price'))
+      countTotal('inCart', 'price')
     }
 
     function inputCheck(previous) {
@@ -64,7 +63,7 @@ export default {
         updateCart(props.product.sku, props.product.pricePerPiece, 'subtraction')
         inputQty.value--
       }
-      setPriceTotal(countTotal('inCart', 'price'))
+      countTotal('inCart', 'price')
       setCartTotal(countTotal('inCart', 'qty'))
       emit('countingTotal', getTotalPricePerProduct(props.product.sku)) 
     }

@@ -4,7 +4,7 @@
     <nav>
       <router-link to="/" class="link">Home</router-link>
       <router-link to="/products" class="link" @click="triggerUpdate(Math.random())">Products</router-link>
-      <router-link to="/checkout" class="cart">
+      <router-link to="/checkout" class="cart" @click="checkoutClicked">
         <span class="qty">{{ cartTotal }}</span>
         <span class="icon">&#128722;</span>
       </router-link>
@@ -14,6 +14,8 @@
 
 <script>
 import { inject } from 'vue'; 
+import { checkoutItems } from '../controller/checkout'
+import { countTotal } from '@/controller/cart';
 
   export default {
     name: 'TheHeader',
@@ -21,7 +23,11 @@ import { inject } from 'vue';
       const { cartTotal } = inject("cartTotal")
       const { triggerUpdate } = inject('trigger')
 
-      return { cartTotal, triggerUpdate }
+      function checkoutClicked() {
+        checkoutItems
+      }
+
+      return { cartTotal, triggerUpdate, checkoutClicked, countTotal }
     }
   }
 </script>

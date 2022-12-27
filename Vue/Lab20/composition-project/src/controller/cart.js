@@ -8,6 +8,8 @@ function createProductObj(sku, qty, price) {
   }
 }
 
+
+// Better data structure: Set
 function updateCart(sku, price, mathOperation, qty = 1) {
   if (inArchive('inCart', 'sku', sku)) {
     const item = getItem('inCart', 'sku', sku)
@@ -49,4 +51,4 @@ export {
   countTotal,
   updateCart,
   getTotalPricePerProduct,
-} 
+}

@@ -2,13 +2,21 @@
   <div class="checkout-container">
     <h1 v-if="productTotal == 1" >There is {{ productTotal }} product in your cart</h1>
     <h1 v-else>There are {{ productTotal }} products in your cart</h1>
-    <div class="card" v-for="product in checkoutItems" :key="product.sku"> 
+    <div class="card" v-for="product in checkoutItems().sort((a, b) => {
+      let result = a.name.split('').reduce((total, current, index) => {
+        return total + a.name.charCodeAt(index)
+      }, 0)
+      let result2 = b.name.split('').reduce((total, current, index) => {
+        return total + b.name.charCodeAt(index)
+      }, 0)
+      return result - result2
+    })" >
       <TheModal :product="product"/>
       <CheckoutCard :product="product"/>
     </div>
     <div class="total">
       <span class="total-text">Your total is: </span>
-      <span class="total-number">{{new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(priceTotal)}} </span>
+      <span class="total-number">{{new Intl.NumberFormat('de-DE', {style: 'currency' , currency: 'EUR'}).format(countTotal('inCart', 'price'))}} </span>
     </div>
   </div>
 </template>
@@ -18,25 +26,22 @@ import CheckoutCard from '../components/CheckoutCard.vue';
 import TheModal from '@/components/TheModal.vue';
 import { inject, provide, ref } from 'vue';  
 import { checkoutItems } from '../controller/checkout'
+import { countTotal } from '@/controller/cart';
 
   export default {
     components:  { CheckoutCard, TheModal } ,
     setup() {
-      const { priceTotal } = inject('price')
       const { cartTotal: productTotal } = inject("cartTotal")
-
-      console.log(checkoutItems)
       let isVisible = ref(false)
       function toggle() {
         isVisible.value = !isVisible.value
       }
-
       provide('modalVisibility', {
         isVisible,
         toggle,
       })
 
-      return { productTotal, checkoutItems, priceTotal }
+      return { productTotal, checkoutItems, countTotal }
     }
   }
 </script>
