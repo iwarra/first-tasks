@@ -2,7 +2,7 @@
   <div class="products-container" :key="trigger">
     <h1>Our coffee universe </h1>
     <div class="card-container" :key="key">
-    <div class="card" v-for="product in paginated.at(pageNumber)" 
+    <div class="card" v-for="product in paginated.at(pageNumber)" key="product.sku" 
         @click="openProductPage($event, product.SKU)">
         <ProductCard :product="product"/>
       </div>

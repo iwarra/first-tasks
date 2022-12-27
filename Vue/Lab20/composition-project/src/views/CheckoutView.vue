@@ -2,7 +2,7 @@
   <div class="checkout-container">
     <h1 v-if="productTotal == 1" >There is {{ productTotal }} product in your cart</h1>
     <h1 v-else>There are {{ productTotal }} products in your cart</h1>
-    <div class="card" v-for="product in checkoutItems().sort((a, b) => {
+    <div class="card" key="product.sku" v-for="product in checkoutItems().sort((a, b) => {
       let result = a.name.split('').reduce((total, current, index) => {
         return total + a.name.charCodeAt(index)
       }, 0)
