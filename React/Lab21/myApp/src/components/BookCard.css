@@ -1,0 +1,15 @@
+.Book.card {
+  display: flex;
+  flex-direction: column;
+  gap: .6em;
+  border: .5px solid var(--clr-secondary);
+  border-radius: .5em;
+  background-color: var(--clr-primary);
+  padding: 1em;
+  cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 19px 0px;
+}
+
+.Book.isVisible {
+  display: none;
+}

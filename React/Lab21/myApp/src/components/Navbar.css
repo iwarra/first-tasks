@@ -1,0 +1,21 @@
+.Navbar.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--clr-secondary);
+  padding: 1em 2em;
+}
+
+.Navbar.btn {
+  cursor: pointer;
+  padding: .7em 1em;
+  transition: 1s;
+  border: .5px solid rgb(153, 153, 153);
+  border-radius: .5em;
+  background-color: var(--clr-accent);
+}
+
+.Navbar.btn:hover {
+  background-color: rgba(222, 220, 220, 0.913);
+  transition: 1s;
+}

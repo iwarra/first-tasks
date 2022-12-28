@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Playfair Display', serif;
+  color: var(--clr-font);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+:root {
+  --clr-primary: rgb(230, 229, 229);
+  --clr-secondary: rgb(214, 191, 232);
+  --clr-accent: rgba(232, 232, 154, 0.975);
+  --clr-font: rgb(41, 41, 41)
+}
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.mb {
+  margin-bottom: 2em;
+}
+
+footer {
+  background-color: var(--clr-secondary);
+  text-align: center;
+  padding-block: 1em;
+}
